@@ -1,0 +1,13 @@
+For getting bug fixes:
+
+1st: Split every log message into a stream of tokens using:
+	– bug[# \t]*[0-9]+,
+	– pr[# \t]*[0-9]+,
+	– show\_bug\.cgi\?id=[0-9]+, or
+	– \[[0-9]+\]
+
+2nd: Do syntactic & semantic analysis on the fixes, identify which commits involved fixing a bug in jira.
+	
+3rd: Once you have a list of bugs and where they occur, you want to find the changes that had been made to the fixed lines of code before that using git blame or something similar.
+
+Weka 
