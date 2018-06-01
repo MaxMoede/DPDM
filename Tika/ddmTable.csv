@@ -1,4 +1,4 @@
-File Name,Version,Size,Number of Smells,Churn,Max Churn,Avg Churn,Chg Set Size,Max Chg Set Size,Avg Chg Set Size,LOC Added,MAX LOC Added,AVG LOC Added,Number of Revisions,Number of Authors,Age in Weeks,Total Lines Touched,Weighted Age,Number of bugs
+File Name,Version,Size,Number of Smells,Churn,Max Churn,Avg Churn,Chg Set Size,Max Chg Set Size,Avg Chg Set Size,LOC Added,MAX LOC Added,AVG LOC Added,Number of Revisions,Number of Authors,Age in Weeks,Total Lines Touched,Weighted Age,Defective
 src/main/java/org/apache/tika/parser/xml/XMLParser.java,0.1-incubating,208,2,-73,1,-14.6,75,52,22.6,82,73,16.4,6,2,68,237,0.286919831,Yes
 src/test/java/org/apache/tika/mime/MimeTypeTest.java,0.1-incubating,110,0,0,0,0,0,0,0,0,0,0,0,0,57,0,0,Yes
 src/main/java/org/apache/tika/mime/MagicClause.java,0.1-incubating,52,0,0,0,0,0,0,0,0,0,0,0,0,63,0,0,Yes
