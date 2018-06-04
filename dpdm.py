@@ -7,11 +7,12 @@ import time
 import csv
 import subprocess
 from subprocess import PIPE
-import os
+import os, errno
 import re
 import git
 import sys
 import itertools
+import shutil
 from datetime import date, timedelta, datetime
 from getTags import *
 from getSmells import *
@@ -19,9 +20,9 @@ from getSmells import *
 
 alreadyUsedIssues = {}
 
-def getRepo():
+def getRepo(projectPath):
 	initialFolder = os.path.abspath(os.curdir)
-	projectPath = projectPath = "../tikaTest/tika"#sys.argv[1]
+	#projectPath = projectPath = "../tikaTest/tika"#sys.argv[1]
 	#print("initial folder: ", initialFolder)
 	repoPath = initialFolder + "/" + projectPath
 	repo = Repo(repoPath)
@@ -729,7 +730,7 @@ def createCSVHeader():
 		"Max Churn", "Avg Churn", "Chg Set Size", "Max Chg Set Size",
 		"Avg Chg Set Size", "LOC Added", "MAX LOC Added", "AVG LOC Added",
 		"Number of Revisions", "Number of Authors", "Age in Weeks",
-		"Total Lines Touched", "Weighted Age", "Number of bugs"]
+		"Total Lines Touched", "Weighted Age", "Defective"]
 	with open("ddmTable.csv", "wb") as csv_file:
 		wr = csv.writer(csv_file, quoting=csv.QUOTE_ALL)
 		wr.writerow(metricNames)
@@ -784,7 +785,7 @@ def getBugs(jiraURL, repo):
 				firstRelCom = fullCommitInstances[0]
 				#print("for commit {}:".format(firstRelCom.hexsha))
 				dateOfCommit = datetime.fromtimestamp(firstRelCom.committed_date).strftime('%Y-%m-%d')
-				difference = subprocess.check_output("git diff -U0 {}^ {} | ../../SURPCODE/bashScript.sh".format(firstRelCom.hexsha, firstRelCom.hexsha), shell=True)
+				difference = subprocess.check_output("git diff -U0 {}^ {} | ../../bashScript.sh".format(firstRelCom.hexsha, firstRelCom.hexsha), shell=True)
 				linesChanged = difference.split('\n')
 				linesChanged = [x.split(":") for x in linesChanged if ".java" in x]
 				linesChanged = [(x[0], x[1]) for x in linesChanged if len(x) > 1]
@@ -872,6 +873,7 @@ def addBugsToCSV(versionFileBugDict):
 	newMetricRows = []
 	with open("ddmTable.csv") as csv_file:
 		readCSV = csv.reader(csv_file, delimiter=',')
+		rowOneHandled = 0
 		for row in readCSV:
 			foundMatch = 0
 			for tupleKey, value in versionFileBugDict.items():
@@ -883,7 +885,10 @@ def addBugsToCSV(versionFileBugDict):
 						foundMatch = 1
 						row.append("Yes")
 			if foundMatch == 0:
-				row.append("No")
+				if rowOneHandled == 0:
+					rowOneHandled = 1
+				else:
+					row.append("No")
 			newMetricRows.append(row)
 	with open("ddmTable.csv", "wb") as csv_file:
 		wr = csv.writer(csv_file, quoting=csv.QUOTE_ALL)
@@ -893,12 +898,31 @@ def addBugsToCSV(versionFileBugDict):
 def resetSonarDB():
 	print("nothing so far.")
 
+def createRepo(githubURL):
+	continuedPath = ""
+	try:
+		os.makedirs("repoHolder")
+	except OSError as e:
+		if e.errno != errno.EEXIST:
+			raise
+		else:
+			shutil.rmtree("./repoHolder")
+			os.makedirs("repoHolder")
+	git.Git("./repoHolder").clone(githubURL)
+	for x in os.listdir('./repoHolder'):
+		if os.path.isdir(x):
+			print("folder within repoHolder: {}".format(str(x)))
+			continuedPath = str(x)
+	return continuedPath
+
 
 def main():
-	projectPath = "../tikaTest/tika"#sys.argv[1]
+	githubURL = sys.argv[1]
+	continuedPath = createRepo(githubURL)
+	projectPath = "./repoHolder/{}".format(continuedPath)#sys.argv[1]
 	jiraURL = sys.argv[3]
 	initialFolder = os.path.abspath(os.curdir)
-	repo = getRepo()
+	repo = getRepo(projectPath)
 	#print("initial folder: ", initialFolder)
 	#print("project path: ")
 	tagTuples = getReleases(projectPath, repo)
@@ -912,7 +936,7 @@ def main():
 	#runSonar(tagTuples[7])
 	print("length of tag tuples: {}".format(len(tagTuples)))
 	createCSVHeader()
-	for x in range(0, len(tagTuples)-1):
+	for x in range(0, 2):#len(tagTuples)-1):
 		resetSonarDB()
 		fileSizes = sizeAtBeginningOfRelease(tagTuples[x])
 		sizeDict = createSizeDict(fileSizes)
