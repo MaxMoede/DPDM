@@ -1,3 +1,0 @@
-Running this thing for tika:
-
-python ./ProjectPredicabilityChecker.py ../tikaTest/tika Tika
