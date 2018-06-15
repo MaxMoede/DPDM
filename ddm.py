@@ -912,7 +912,7 @@ def main():
 	#runSonar(tagTuples[7])
 	print("length of tag tuples: {}".format(len(tagTuples)))
 	createCSVHeader()
-	for x in range(0, len(tagTuples)-1):
+	for x in range(len(tagTuples)-6, len(tagTuples)-1):
 		resetSonarDB()
 		fileSizes = sizeAtBeginningOfRelease(tagTuples[x])
 		sizeDict = createSizeDict(fileSizes)
