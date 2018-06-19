@@ -35,7 +35,7 @@ def get_issues():
 		#cursor.execute("CREATE DATABASE sonar")
 		cursor.close()
 		
-		newCursor = conn.cursor()
+		'''newCursor = conn.cursor()
 		newCursor.execute("TRUNCATE issues;")
 		newCursor.execute("TRUNCATE projects;")
 		newCursor.execute("TRUNCATE snapshots;")
@@ -46,7 +46,7 @@ def get_issues():
 		newCursor.execute("TRUNCATE file_sources;")
 		newCursor.execute("TRUNCATE events;")
 		newCursor.execute("TRUNCATE ce_activity;")
-		newCursor.close()
+		newCursor.close()'''
 
 	except Error as e:
 	    print(e)
