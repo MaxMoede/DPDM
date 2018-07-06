@@ -20,10 +20,10 @@ def get_issues():
 	                                   user='sonarUser',
 			                           password='happify')
 		cursor = conn.cursor()
-		cursor.execute("""SELECT R.id, R.name, A.failure_level, R.system_tags
+		cursor.execute("""SELECT R.plugin_rule_key, R.name, A.failure_level, R.system_tags, R.def_remediation_base_effort
 							FROM rules R, active_rules A
 							WHERE R.language LIKE '%java%' AND
-							R.id=A.rule_id""")
+							R.id=A.rule_id""") #used to be R.id as the first thing to grab.
 		row = cursor.fetchone()
 		issues.append(row)
 		while row is not None:
@@ -69,14 +69,31 @@ def convertToFile(issueList):
 	ruleDescriptions = []
 	ruleSeverities = []
 	ruleTags = []
+	ruleTimes = []
 	ruleIDs.append("Rule ID")
 	ruleDescriptions.append("Description")
 	ruleSeverities.append("Severity")
 	ruleTags.append("Tags")
+	ruleTimes.append("Time")
 	for x in range(0, len(issueList)):
 		if issueList[x] is not None:
 			ruleIDs.append(issueList[x][0])
-	for x in range(0, len(issueList)):
+			ruleDescriptions.append(issueList[x][1])
+			ruleTags.append(issueList[x][3])
+			ruleTimes.append(issueList[x][4])
+			if issueList[x][2] == 0:
+				ruleSeverities.append("INFO")
+			elif issueList[x][2] == 1:
+				ruleSeverities.append("MINOR")
+			elif issueList[x][2] == 2:
+				ruleSeverities.append("MAJOR")
+			elif issueList[x][2] == 3:
+				ruleSeverities.append("CRITICAL")
+			elif issueList[x][2] == 4:
+				ruleSeverities.append("BLOCKER")
+			else:
+				ruleSeverities.append("UNKNOWN")
+	'''for x in range(0, len(issueList)):
 		if issueList[x] is not None:
 			ruleDescriptions.append(issueList[x][1])
 	for x in range(0, len(issueList)):
@@ -95,13 +112,14 @@ def convertToFile(issueList):
 				ruleSeverities.append("UNKNOWN")
 	for x in range(0, len(issueList)):
 		if issueList[x] is not None:
-			ruleTags.append(issueList[x][3])
+			ruleTags.append(issueList[x][3])'''
 	with open("ruleDescriptionTable.csv", "wb") as csv_file:
 		wr = csv.writer(csv_file, quoting=csv.QUOTE_ALL)
 		wr.writerow(ruleIDs)
 		wr.writerow(ruleDescriptions)
 		wr.writerow(ruleSeverities)
 		wr.writerow(ruleTags)
+		wr.writerow(ruleTimes)
 	
 
 def main():

@@ -986,9 +986,12 @@ def createRepo(githubURL):
 			os.makedirs("repoHolder")
 	git.Git("./repoHolder").clone(githubURL)
 	for x in os.listdir('./repoHolder'):
-		if os.path.isdir(x):
+		print("this is something: {}".format(str(x)))
+		if os.path.isdir(os.path.join('./repoHolder', x)):
 			print("folder within repoHolder: {}".format(str(x)))
 			continuedPath = str(x)
+		else:
+			print("not recognized as a directory... {}".format(str(x)))
 	return continuedPath
 
 
