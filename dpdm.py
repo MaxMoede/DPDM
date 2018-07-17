@@ -509,9 +509,6 @@ def get_smells(tagTuple, fileSizes, tagTuples, repo, ruleIDs):
 								else:
 									ruleIDIssueDict[fileAndRuleID] = 1
 								foundAMatch = 1
-							#if foundAMatch == 0:
-							#	issueDict[fileName] = 1
-							#	ruleIDIssueDict[fileAndRuleID] = 1
 						if foundAMatch == 0:
 							missingFileAndRuleID = fileName + "\t" + correspondingRuleID
 							issueDict[fileName] = 1
@@ -529,43 +526,10 @@ def get_smells(tagTuple, fileSizes, tagTuples, repo, ruleIDs):
 					newCombinedFileAndIssue = eachFileName + "\t" + eachMissingRuleID
 					#print(newCombinedFileAndIssue)
 					ruleIDIssueDict[newCombinedFileAndIssue] = 0
-				
-			#for eachRuleID in ruleIDs:
-			#	for eachFileName, numProblems in issueDict.items():
-					#alreadyFound = 0
-					#for eachFileAndRuleID, numProblems in ruleIDIssueDict.items():
-					#	if str(eachRuleID) in eachFileAndRuleID and str(eachFileName) in eachFileAndRuleID:
-					#		alreadyFound = 1
-					#		print("This is good, we found something.")
-					#		break
-					#if alreadyFound == 0:
-					#	combinedFileNameAndRuleID = eachFileName + "\t" + str(eachRuleID)
-					#	ruleIDIssueDict[combinedFileNameAndRuleID] = 0
-					#	print("filled in a missing value")
 
-		#doneWSonar = subprocess.check_output("mvn clean install -DskipTests=true -Dmaven.test.failure.ignore=true sonar:sonar  -Dsonar.host.url=http://localhost:9000", shell=True)
 	except subprocess.CalledProcessError as someError:
 		print(someError)
-		#sys.exit(0)
 		return issueDict
-	'''if doneWSonar:
-		issues = get_issues()
-		if len(issues) < 0:
-			print("getting smells failed.")
-		#print("Issues: {}".format(issues))
-		for eachIssue in issues:
-			if eachIssue is not None:
-				if eachIssue[2].decode("utf-8") not in alreadyUsedIssues:
-					fileName = eachIssue[0].decode("utf-8")
-					#print("fileName with an issue: {}".format(fileName))
-					if fileName not in issueDict:
-						issueDict[fileName] = 1
-					else:
-						#print("file already in dict! woohoo!")
-						issueDict[fileName] += 1
-					alreadyUsedIssues[eachIssue[2].decode("utf-8")] = "Used"'''
-				#else:
-				#	print("HEYYYYYY file already in issues.")
 	for eachFile, numIssues in issueDict.items():
 		print("issues for {}: {}".format(eachFile, numIssues))
 	for eachFileAndRuleID, numIssues in ruleIDIssueDict.items():
@@ -770,29 +734,6 @@ def buildTable(version, sizeDict, smellsDict, churnDict,
 				if numTimesRuleBroken != 0:
 					print("rule {} for file {} has been broken {} times".format(eachThingy[1], eachThingy[0], numTimesRuleBroken))
 				metricDict[eachThingy[0]].append(numTimesRuleBroken)
-	#sys.exit(0)
-			#theCount = 0
-			#for ruleIDFileKey in ruleIDIssueDict.keys():
-			#	if existingFileName in ruleIDFileKey:
-			#		theCount += 1
-			#print("the count: {}".format(theCount))
-
-	'''for x in range(0, len(ruleIDs)):
-		for fileNameAndRuleID, numIssues in ruleIDIssueDict.items():
-			alreadyFound = 0
-			nameAndRuleList = fileNameAndRuleID.split('\t')
-			fileNameToFind = nameAndRuleList[0]
-			ruleID = nameAndRuleList[1]
-			#print("File name: {}".format(fileNameToFind))
-			#print("Rule ID: {}".format(ruleID))
-			if int(ruleID) == int(ruleIDs[x]):
-				#print("matched rule id {} up".format(ruleID))
-				for existingFileName, listOfMetrics in metricDict.items():
-					if alreadyFound == 0:
-						if fileNameToFind in existingFileName:
-							print("found a match for {} on rule id {}".format(fileNameToFind, ruleID))
-							metricDict[existingFileName].append(numIssues)
-							alreadyFound = 1'''
 	#print("info on src/java/org/apache/jcs/engine/control/CompositeCache.java: {}".format(totTouchedDict["src/java/org/apache/jcs/engine/control/CompositeCache.java"]))
 	with open("ddmTable.csv", "a") as csv_file:
 		wr = csv.writer(csv_file, quoting=csv.QUOTE_ALL)
