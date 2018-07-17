@@ -1,6 +1,7 @@
 #MAX MOEDE
 from jira import JIRA
 from git import Repo
+import multiprocessing
 import tempfile
 import json
 import time
@@ -78,16 +79,11 @@ def sizeAtBeginningOfRelease(tagTuple):
 			if len(fileTuple) > 1:
 				linesOfCode = fileTuple[0]
 				fileName = fileTuple[1]
-				print("file name: {}".format(fileName))
+				#print("file name: {}".format(fileName))
 				foundFileNames.append(fileName)
 				fileSizes.append((tagName, fileName, linesOfCode))
 	for eachUnaccountedName in unaccountedFileNames:
-		if eachUnaccountedName in foundFileNames:
-			print("good")
-		else:
-			#if "ExcelExtractor" in eachUnaccountedName:
-			#	print("found it")
-			#	sys.exit(0)
+		if eachUnaccountedName not in foundFileNames:
 			fileSizes.append((tagName, eachUnaccountedName, 0))
 		#elif eachUnaccountedName not in foundFileNames:
 			#print("found unaccounted name: {}".format(eachUnaccountedName))
@@ -937,6 +933,28 @@ def createRepo(githubURL):
 			print("not recognized as a directory... {}".format(str(x)))
 	return continuedPath
 
+def run_for_a_version(tagTuples, repo, ruleIDs, projectPath, continuedPath, githubURL, jiraURL, initialFolder, x):
+	resetSonarDB()
+	fileSizes = sizeAtBeginningOfRelease(tagTuples[x])
+	sizeDict = createSizeDict(fileSizes)
+	smellsDict, ruleIDIssueDict = get_smells(tagTuples[x], fileSizes, tagTuples, repo, ruleIDs)
+	linesTouchedDict = loc_touched(tagTuples[x], fileSizes, tagTuples, repo) #file dict, tuple of added and deleted
+	churnDict = churn(linesTouchedDict) #file dictionary, churn of files
+	maxChurnDict = churn_max(tagTuples[x], fileSizes, tagTuples, repo) #file dictionary, max of churn for a single commit
+	avgChurnDict = churn_avg(tagTuples[x], fileSizes, tagTuples, repo) #file dictionary, avg of churn for each time file was touched
+	chgSetDict = chg_set_size(tagTuples[x], fileSizes, tagTuples, repo) #file dictionary, total number of associated files
+	maxChgDict = max_chg_set(tagTuples[x], fileSizes, tagTuples, repo) #file dictionary, max # of associated files for a revision
+	avgChgDict = avg_chg_set(tagTuples[x], fileSizes, tagTuples, repo) #file dictionary, avg associated files for each revision
+	locAddedDict = loc_added(linesTouchedDict) #file dictionary, sum of loc added
+	maxLocDict = loc_max(tagTuples[x], fileSizes, tagTuples, repo) #file dictionary, max added
+	avgLocDict = loc_avg(tagTuples[x], fileSizes, tagTuples, repo) #file dictionary, tuple of added/deleted
+	numRevDict = num_revisions(tagTuples[x], fileSizes, tagTuples, repo) #file dictionary, num revisions
+	numAuthorsDict = num_authors(tagTuples[x], fileSizes, tagTuples, repo)  #file dictionary, num authors per file
+	ageDict = get_age(tagTuples[x], tagTuples, repo) #file dictionary, age in weeks
+	totTouchedDict = total_loc_touched(linesTouchedDict) #file dict, total Lines touched
+	weightedAgeDict = weighted_age(ageDict, totTouchedDict) #file dict, weighted age
+	buildTable(tagTuples[x][0], sizeDict, smellsDict, churnDict, maxChurnDict, avgChurnDict, chgSetDict, maxChgDict, avgChgDict, locAddedDict, maxLocDict, avgLocDict, numRevDict, numAuthorsDict, ageDict, totTouchedDict, weightedAgeDict, ruleIDIssueDict, ruleIDs)
+
 
 def main():
 	githubURL = sys.argv[1]
@@ -945,41 +963,20 @@ def main():
 	jiraURL = sys.argv[3]
 	initialFolder = os.path.abspath(os.curdir)
 	repo = getRepo(projectPath)
-	#print("initial folder: ", initialFolder)
-	#print("project path: ")
+
 	tagTuples = getReleases(projectPath, repo)
 	ruleIDs = get_rule_IDs()
-	#for item in tagTuples:
-	#	print("tuple: ", item)
-	#fileSizes = sizeAtBeginningOfRelease(tagTuples[23])
-	#for item in fileSizes:
-	#		print(item)
-	#get_smells(tagTuples[7], fileSizes, tagTuples, repo)
-	#sys.exit(0)
-	#runSonar(tagTuples[7])
+
 	print("length of tag tuples: {}".format(len(tagTuples)))
 	createCSVHeader(ruleIDs)
 	for x in range(0, len(tagTuples)-1):
-		resetSonarDB()
-		fileSizes = sizeAtBeginningOfRelease(tagTuples[x])
-		sizeDict = createSizeDict(fileSizes)
-		smellsDict, ruleIDIssueDict = get_smells(tagTuples[x], fileSizes, tagTuples, repo, ruleIDs)
-		linesTouchedDict = loc_touched(tagTuples[x], fileSizes, tagTuples, repo) #file dict, tuple of added and deleted
-		churnDict = churn(linesTouchedDict) #file dictionary, churn of files
-		maxChurnDict = churn_max(tagTuples[x], fileSizes, tagTuples, repo) #file dictionary, max of churn for a single commit
-		avgChurnDict = churn_avg(tagTuples[x], fileSizes, tagTuples, repo) #file dictionary, avg of churn for each time file was touched
-		chgSetDict = chg_set_size(tagTuples[x], fileSizes, tagTuples, repo) #file dictionary, total number of associated files
-		maxChgDict = max_chg_set(tagTuples[x], fileSizes, tagTuples, repo) #file dictionary, max # of associated files for a revision
-		avgChgDict = avg_chg_set(tagTuples[x], fileSizes, tagTuples, repo) #file dictionary, avg associated files for each revision
-		locAddedDict = loc_added(linesTouchedDict) #file dictionary, sum of loc added
-		maxLocDict = loc_max(tagTuples[x], fileSizes, tagTuples, repo) #file dictionary, max added
-		avgLocDict = loc_avg(tagTuples[x], fileSizes, tagTuples, repo) #file dictionary, tuple of added/deleted
-		numRevDict = num_revisions(tagTuples[x], fileSizes, tagTuples, repo) #file dictionary, num revisions
-		numAuthorsDict = num_authors(tagTuples[x], fileSizes, tagTuples, repo)  #file dictionary, num authors per file
-		ageDict = get_age(tagTuples[x], tagTuples, repo) #file dictionary, age in weeks
-		totTouchedDict = total_loc_touched(linesTouchedDict) #file dict, total Lines touched
-		weightedAgeDict = weighted_age(ageDict, totTouchedDict) #file dict, weighted age
-		buildTable(tagTuples[x][0], sizeDict, smellsDict, churnDict, maxChurnDict, avgChurnDict, chgSetDict, maxChgDict, avgChgDict, locAddedDict, maxLocDict, avgLocDict, numRevDict, numAuthorsDict, ageDict, totTouchedDict, weightedAgeDict, ruleIDIssueDict, ruleIDs)
+		p = multiprocessing.Process(target=run_for_a_version, name="Running One Version", args=(tagTuples, repo, ruleIDs, projectPath, continuedPath, githubURL, jiraURL, initialFolder, x, ))
+		p.start()
+		p.join(timeout=5000)
+		print("killing the process, took too long")
+		p.terminate()
+		#run_for_a_version(tagTuples, repo, ruleIDs, projectPath, continuedPath, githubURL, jiraURL, initialFolder)
+		
 	versionFileBugDict = getBugs(jiraURL, repo)
 	addBugsToCSV(versionFileBugDict)
 
