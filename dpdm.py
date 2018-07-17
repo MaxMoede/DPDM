@@ -502,7 +502,7 @@ def get_smells(tagTuple, fileSizes, tagTuples, repo, ruleIDs):
 						for eachFileName, numIssues in issueDict.items():
 							fileAndRuleID = eachFileName + "\t" + correspondingRuleID
 							if fileName in eachFileName and foundAMatch == 0:
-								print("got a match in get smells. {} for {}".format(fileName, eachFileName))
+								#print("got a match in get smells. {} for {}".format(fileName, eachFileName))
 								issueDict[eachFileName] += 1
 								if fileAndRuleID in ruleIDIssueDict:
 									ruleIDIssueDict[fileAndRuleID] += 1
@@ -567,9 +567,11 @@ def get_smells(tagTuple, fileSizes, tagTuples, repo, ruleIDs):
 				#else:
 				#	print("HEYYYYYY file already in issues.")
 	for eachFile, numIssues in issueDict.items():
-		print("issues for {}: {}".format(eachFile, numIssues))
+		if numIssues > 0:
+			print("issues for {}: {}".format(eachFile, numIssues))
 	for eachFileAndRuleID, numIssues in ruleIDIssueDict.items():
-		print("{}: {}".format(eachFileAndRuleID, numIssues))
+		if numIssues > 0:
+			print("{}: {}".format(eachFileAndRuleID, numIssues))
 	return issueDict, ruleIDIssueDict
 
 def churn_max(tagTuple, fileSizes, tagTuples, repo):
