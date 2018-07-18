@@ -973,8 +973,15 @@ def main():
 		p = multiprocessing.Process(target=run_for_a_version, name="Running One Version", args=(tagTuples, repo, ruleIDs, projectPath, continuedPath, githubURL, jiraURL, initialFolder, x, ))
 		p.start()
 		p.join(timeout=5000)
-		print("killing the process, took too long")
-		p.terminate()
+		if p.is_alive():
+			print("killing the process, took too long")
+			p.terminate()
+			p.join()
+			#sys.exit(0)
+		else:
+			print("process was already dead.")
+			#sys.exit(0)
+		
 		#run_for_a_version(tagTuples, repo, ruleIDs, projectPath, continuedPath, githubURL, jiraURL, initialFolder)
 		
 	versionFileBugDict = getBugs(jiraURL, repo)
