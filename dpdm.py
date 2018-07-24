@@ -21,13 +21,13 @@ from getSmells import *
 
 alreadyUsedIssues = {}
 
-def getRepo(projectPath):
+def getRepo(projectPath): #uses gitpython to create a repo instance of the project
 	initialFolder = os.path.abspath(os.curdir)
 	repoPath = initialFolder + "/" + projectPath
 	repo = Repo(repoPath)
 	return repo
 
-def getReleases(projectPath, repo):
+def getReleases(projectPath, repo): #returns a list of all releases (tags) of the project
 	finalTags = []
 	tagTuples = []
 	os.chdir(projectPath)
@@ -48,7 +48,7 @@ def getReleases(projectPath, repo):
 	tagTuples.sort(key=lambda x: datetime.strptime(x[2], '%Y-%m-%d'))
 	return tagTuples
 
-def sizeAtBeginningOfRelease(tagTuple):
+def sizeAtBeginningOfRelease(tagTuple): #calculates file sizes at the beginning of a release.
 	print("getting size at beginning of release...")
 	commitObj = tagTuple[1]
 	tagName = tagTuple[0]
@@ -73,24 +73,20 @@ def sizeAtBeginningOfRelease(tagTuple):
 	newOutput = ps.communicate()[0].split('\n')
 
 	for file in newOutput:
-		#filter for java files
+		#filter for java files. This may be removed in future releases of dpdm.
 		if ".java" in file:
 			fileTuple = file.split()
 			if len(fileTuple) > 1:
 				linesOfCode = fileTuple[0]
 				fileName = fileTuple[1]
-				#print("file name: {}".format(fileName))
 				foundFileNames.append(fileName)
 				fileSizes.append((tagName, fileName, linesOfCode))
 	for eachUnaccountedName in unaccountedFileNames:
 		if eachUnaccountedName not in foundFileNames:
 			fileSizes.append((tagName, eachUnaccountedName, 0))
-		#elif eachUnaccountedName not in foundFileNames:
-			#print("found unaccounted name: {}".format(eachUnaccountedName))
-	#sys.exit(0)
 	return fileSizes
 
-def num_revisions(tagTuple, fileSizes, tagTuples, repo):
+def num_revisions(tagTuple, fileSizes, tagTuples, repo): #calculates the number of revisions for files within a release period
 	print("getting number of revisions per file...")
 	timesTouchedDict = {}
 	commitObj = tagTuple[1]
@@ -112,7 +108,7 @@ def num_revisions(tagTuple, fileSizes, tagTuples, repo):
 				timesTouchedDict[fileTouched] = 1
 	return timesTouchedDict
 
-def num_authors(tagTuple, fileSizes, tagTuples, repo):
+def num_authors(tagTuple, fileSizes, tagTuples, repo): #calculates the number of authors for a file within a release period
 	print("getting number of authors per file...")
 	totAuthDict = {}
 	authDict = {}
@@ -143,7 +139,7 @@ def num_authors(tagTuple, fileSizes, tagTuples, repo):
 	return totAuthDict
 
 
-def churn(linesTouchedDict):
+def churn(linesTouchedDict): #calculates churn for files within a release period
 	print("calculating churn...")
 	churnDict = {}
 	for key, linesTouchedTuple in linesTouchedDict.items():
@@ -151,7 +147,7 @@ def churn(linesTouchedDict):
 	return churnDict
 
 
-def chg_set_size(tagTuple, fileSizes, tagTuples, repo):
+def chg_set_size(tagTuple, fileSizes, tagTuples, repo): #calculates chg set size
 	print("calculating chg set...")
 	commitObj = tagTuple[1]
 	chgSetsNumDict = {}
@@ -190,7 +186,7 @@ def chg_set_size(tagTuple, fileSizes, tagTuples, repo):
 		chgSetsNumDict[key] = len(filesList)
 	return chgSetsNumDict
 
-def max_chg_set(tagTuple, fileSizes, tagTuples, repo):
+def max_chg_set(tagTuple, fileSizes, tagTuples, repo): #calculates max chg set size
 	print("calculating max chg set...")
 	commitObj = tagTuple[1]
 	chgSetsNumDict = {}
@@ -233,13 +229,11 @@ def avg_chg_set(tagTuple, fileSizes, tagTuples, repo):
 	version_index = tagTuples.index(tagTuple)
 	nextVersionTuple = tagTuples[version_index + 1]
 	nextVersionHash = nextVersionTuple[1]
-	#print("Next version tuple: ", nextVersionTuple)
 	justFiles = getFilesFromSizes(fileSizes)
 	for file in justFiles:
 		chgListDict[file] = []
-	#print("first commit: ", commitObj.hexsha)
-	#print("next commit: ", nextVersionHash.hexsha)
 	listOfComHashes = get_list_of_coms_between_versions(commitObj.hexsha, nextVersionHash.hexsha)
+
 	for x in range(0, len(listOfComHashes)-1):
 		firstCom = listOfComHashes[x]
 		secondCom = listOfComHashes[x+1]
@@ -264,7 +258,6 @@ def avg_chg_set(tagTuple, fileSizes, tagTuples, repo):
 			avgChgDict[key] = 0
 		else:
 			avgChgDict[key] = sum(associatedFilesList) / float(len(associatedFilesList))
-		#print("avg change for {}: {}".format(key, avgChgDict[key]))
 	return avgChgDict
 
 
@@ -273,22 +266,18 @@ def loc_touched(tagTuple, fileSizes, tagTuples, repo):
 	commitObj = tagTuple[1]
 	linesTouchedDict = {}
 	version_index = tagTuples.index(tagTuple)
-	#try:
 	nextVersionTuple = tagTuples[version_index + 1]
 	nextVersionHash = nextVersionTuple[1]
-	#print("Next version tuple: ", nextVersionTuple)
 	justFiles = getFilesFromSizes(fileSizes)
 	for file in justFiles:
 		linesTouchedDict[file] = (0,0)
-	#print("first commit: ", commitObj.hexsha)
-	#print("next commit: ", nextVersionHash.hexsha)
 	listOfComHashes = get_list_of_coms_between_versions(commitObj.hexsha, nextVersionHash.hexsha)
+	
 	for x in range(0, len(listOfComHashes)-1):
 		firstCom = listOfComHashes[x]
 		secondCom = listOfComHashes[x+1]
 		firstCom = repo.commit(firstCom).hexsha
 		secondCom = repo.commit(secondCom).hexsha
-		#print("first com: {}, secondCom: {}".format(firstCom, secondCom))
 		numStatOutput = subprocess.check_output("git diff --numstat {}..{}".format(firstCom, secondCom), shell=True)
 		eachFileChanges = numStatOutput.split('\n')
 		for eachFileChanged in eachFileChanges:
@@ -298,7 +287,6 @@ def loc_touched(tagTuple, fileSizes, tagTuples, repo):
 				if changedElements[2] not in linesTouchedDict:
 					linesTouchedDict[fileName] = (int(changedElements[0]), int(changedElements[1]))
 				else:
-					#print(changedElements[0])
 					oldTuple = linesTouchedDict[fileName]
 					newLinesAdded = oldTuple[0] + int(changedElements[0])
 					newLinesDeleted = oldTuple[1] + int(changedElements[1])
@@ -326,7 +314,6 @@ def loc_avg(tagTuple, fileSizes, tagTuples, repo):
 	commitObj = tagTuple[1]
 	linesTouchedDict = {}
 	version_index = tagTuples.index(tagTuple)
-	#try:
 	nextVersionTuple = tagTuples[version_index + 1]
 	nextVersionHash = nextVersionTuple[1]
 	justFiles = getFilesFromSizes(fileSizes)
@@ -334,6 +321,7 @@ def loc_avg(tagTuple, fileSizes, tagTuples, repo):
 		linesTouchedDict[file] = ([], [])
 		avgAddedLines[file] = 0
 	listOfComHashes = get_list_of_coms_between_versions(commitObj.hexsha, nextVersionHash.hexsha)
+
 	for x in range(0, len(listOfComHashes)-1):
 		firstCom = listOfComHashes[x]
 		secondCom = listOfComHashes[x+1]
@@ -380,13 +368,13 @@ def churn_avg(tagTuple, fileSizes, tagTuples, repo):
 	commitObj = tagTuple[1]
 	linesTouchedDict = {}
 	version_index = tagTuples.index(tagTuple)
-	#try:
 	nextVersionTuple = tagTuples[version_index + 1]
 	nextVersionHash = nextVersionTuple[1]
 	justFiles = getFilesFromSizes(fileSizes)
 	for file in justFiles:
 		linesTouchedDict[file] = []
 	listOfComHashes = get_list_of_coms_between_versions(commitObj.hexsha, nextVersionHash.hexsha)
+
 	for x in range(0, len(listOfComHashes)-1):
 		firstCom = listOfComHashes[x]
 		secondCom = listOfComHashes[x+1]
@@ -398,14 +386,11 @@ def churn_avg(tagTuple, fileSizes, tagTuples, repo):
 			changedElements = eachFileChanged.split()
 			if len(changedElements) == 3 and ".java" in changedElements[2]:
 				fileName = changedElements[2]
-				#if "MidiParser.java" in fileName:
-				#	print("Lines added/deleted for {}: {}/{}".format("midi parser", changedElements[0], changedElements[1]))
 				if changedElements[2] not in linesTouchedDict:
 					linesTouchedDict[fileName] = [int(changedElements[0]) - int(changedElements[1])]
 				else:
 					linesTouchedDict[fileName].append(int(changedElements[0]) - int(changedElements[1]))
 	for key, linesTouchedList in linesTouchedDict.items():
-		#print("key: {}... lines Touched list: {}".format(key, linesTouchedList))
 		if not linesTouchedList:
 			avgChurnDict[key] = 0
 		else:
@@ -446,20 +431,14 @@ def loc_max(tagTuple, fileSizes, tagTuples, repo):
 						linesAddedDict[fileName] = newLinesAdded
 	return linesAddedDict
 
-'''def runSonar(tagTuple):
-	commitObj = tagTuple[1].hexsha
-	#previousCommit = subprocess.check_output("git show {}^1".format(commitObj), shell=True)
-	#previousComHash = previousCommit.split()[1]
-	#print("previous commit hash: {}".format(previousComHash))
-	try:
-		subprocess.check_output("git checkout {}".format(commitObj), shell=True)
-		subprocess.check_output("mvn clean install", shell=True)
-		subprocess.check_output("mvn sonar:sonar ", shell=True)
-	except subprocess.CalledProcessError as someError:
-		print(someError)'''
-
 
 def get_smells(tagTuple, fileSizes, tagTuples, repo, ruleIDs):
+	#Jacky: This will be the function that you will need to change to support ant builds.
+	#I apologize in advance for how bulky this function is.
+	#Sonarqube can be ran on a maven project by building the project with maven and then running a sonar command.
+	#Ant builds are more tricky. See: https://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner+for+Ant
+	#You will have to come up with a way to automatically change the build.xml of projects to include the necessary
+	#lines of code for sonarqube to run. I can clarify this if you run into problems.
 	print("calculating smells....")
 	issueDict = {}
 	ruleIDIssueDict = {}
@@ -478,27 +457,21 @@ def get_smells(tagTuple, fileSizes, tagTuples, repo, ruleIDs):
 	try:
 		p = subprocess.Popen(["mvn", "clean", "install", "-DskipTests=true", "-Dmaven.test.failure.ignore=true", "sonar:sonar", "-Dsonar.host.url=http://localhost:9000"], stdout=PIPE, stderr=PIPE)
 		output, error = p.communicate()
-		#print("output: {}".format(str(output)))
 		if p.returncode != 0: 
 			print("sonarqube failed %d %s %s" % (p.returncode, output, error))
-			#sys.exit(0)
 		else:
 			issues = get_issues()
 			if len(issues) < 0:
 				print("getting smells failed.")
-			#print("Issues: {}".format(issues))
 			for eachIssue in issues:
 				if eachIssue is not None:
 					if eachIssue[2].decode("utf-8") not in alreadyUsedIssues:
-						#print("RULE ID For issue: {}".format(eachIssue[1]))
 						fileName = eachIssue[0].decode("utf-8")
-						#print("fileName with an issue: {}".format(fileName))
 						foundAMatch = 0
 						correspondingRuleID = str(eachIssue[1])
 						for eachFileName, numIssues in issueDict.items():
 							fileAndRuleID = eachFileName + "\t" + correspondingRuleID
 							if fileName in eachFileName and foundAMatch == 0:
-								#print("got a match in get smells. {} for {}".format(fileName, eachFileName))
 								issueDict[eachFileName] += 1
 								if fileAndRuleID in ruleIDIssueDict:
 									ruleIDIssueDict[fileAndRuleID] += 1
@@ -515,12 +488,9 @@ def get_smells(tagTuple, fileSizes, tagTuples, repo, ruleIDs):
 			for eachFileName in issueDict.keys():
 				SpecificFileRuleIDList = [x for x in ruleIDIssueDict.keys() if eachFileName in x]
 				combinedSpecificList = '\t'.join(SpecificFileRuleIDList)
-				#print("File list: {}".format(SpecificFileRuleIDList))
 				missingRuleIDs = [j for j in stringRuleIDs if j not in combinedSpecificList]
-				#print("Missing Rule IDs: {}".format(missingRuleIDs))
 				for eachMissingRuleID in missingRuleIDs:
 					newCombinedFileAndIssue = eachFileName + "\t" + eachMissingRuleID
-					#print(newCombinedFileAndIssue)
 					ruleIDIssueDict[newCombinedFileAndIssue] = 0
 
 	except subprocess.CalledProcessError as someError:
@@ -566,8 +536,6 @@ def churn_max(tagTuple, fileSizes, tagTuples, repo):
 					newMaxChurn = int(changedElements[0]) - int(changedElements[1])
 					if newMaxChurn > oldMaxChurn:
 						churnMaxDict[fileName] = newMaxChurn
-	#for key, maxChurn in churnMaxDict.items():
-	#	print("max churn for {}: {}".format(key, maxChurn))
 	return churnMaxDict
 
 def loc_added(linesTouchedDict):
@@ -605,15 +573,11 @@ def get_age(tagTuple, tagTuples, repo):
 	version_index = tagTuples.index(tagTuple)
 	nextVersionTuple = tagTuples[version_index + 1]
 	nextVersion = nextVersionTuple[1]
-	#print("next version tuple: should end with c92", nextVersion.hexsha)
 	previousCommit = subprocess.check_output("git show {}^1".format(nextVersion.hexsha), shell=True)
 	previousComHash = previousCommit.split()[1]
 	previousCommitDate = subprocess.check_output("git show -s --format=%ci {}".format(previousComHash), shell=True)
-	#Date of commit: 2010-03-31 19:35:14 +0000
 	previousCommitDate = previousCommitDate.split()[0]
 	preComDate = datetime.strptime(previousCommitDate, '%Y-%m-%d')
-	#print("Date of commit: {}".format(previousCommitDate))
-	#print("previous commit hash of next version: ", previousComHash)
 	subprocess.check_output("git checkout -f {}".format(previousComHash), shell=True)
 	rawFileData = subprocess.check_output("git ls-tree --full-tree -r {}".format(previousComHash), shell=True)
 	splitFiles = rawFileData.split('\n')
@@ -622,24 +586,15 @@ def get_age(tagTuple, tagTuples, repo):
 		fileDataParts = fileData.split()
 		if len(fileDataParts) > 3:
 			fileName = fileDataParts[3]
-			#print("fileName: {}".format(fileName))
 			listOfFiles.append(fileName)
 	for fileName in listOfFiles:
 		if ".java" in fileName:
 			try:
-				#ageData = subprocess.check_output("git log --follow --format=%aD {} | tail -1".format(fileName), shell=True).rstrip()
 				ageData = subprocess.check_output("git log --diff-filter=A --follow --format=%aI -- {} | tail -1".format(fileName), shell=True)
 				ageData = ageData[0:10]
-				#print("age data: {}".format(ageData))
 				fileCreationDate = datetime.strptime(ageData, '%Y-%m-%d')
-				#sys.exit(0)
-				#Thu, 7 Jun 2007 04:15:32
-				#if ageData.endswith(' +0000'):
-				#	ageData = ageData[:-6]
-				#fileCreationDate = datetime.strptime(ageData, '%a, %d %b %Y %H:%M:%S')
 				ageDifference = preComDate - fileCreationDate
 				ageDifInWeeks = ageDifference.days / 7
-				#print ("age of {}: {} weeks".format(fileName, ageDifInWeeks))
 				ageDict[fileName] = abs(ageDifInWeeks)
 			except:
 				ageDict[fileName] = 0
@@ -650,22 +605,14 @@ def weighted_age(ageDict, locTouchedDict):
 	print("calculating weighted age...")
 	weightDict = {}
 	for key, locTouched in locTouchedDict.items():
-		#print("key: {}".format(key))
-		#try:
 		if locTouched != 0:
 			if key not in ageDict:
-				#print("key not in age dict!!!")
 				weightDict[key] = 0
 			else:
 				weightedAge = ageDict[key] / float(locTouched)
 				weightDict[key] = weightedAge
-				#print("weighted age for {}: {}".format(key, weightedAge))
 		else:
-			#print("no loc touched for {}".format(key))
 			weightDict[key] = 0
-		#xcept:
-		#	print("something went wrong")
-		#	continue
 	return weightDict
 		
 
@@ -684,7 +631,6 @@ def buildTable(version, sizeDict, smellsDict, churnDict,
 	numRevDict, numAuthorsDict, ageDict, totTouchedDict, 
 	weightedAgeDict, ruleIDIssueDict, ruleIDs):
 	print("building table...")
-	#print("this ran")
 	metricDict = {} #in order of arguments for function
 	usedFiles = []
 	eachFileDict = []
@@ -696,8 +642,6 @@ def buildTable(version, sizeDict, smellsDict, churnDict,
 	allFileNames = makeFileNameList(eachFileDict)
 	for fileName, smellNum in smellsDict.items():
 		print("smells for {}: {}".format(smellNum, fileName))
-	#print("lenght of file dict: {}".format(len(eachFileDict)))
-	#print("total file names for version: {}".format(len(allFileNames)))
 	for fileName in allFileNames:
 		if fileName not in metricDict:
 			metricDict[fileName] = [fileName, version]
@@ -712,7 +656,6 @@ def buildTable(version, sizeDict, smellsDict, churnDict,
 						if fileName not in usedFiles:
 							usedFiles.append(fileName)
 						filesForThisMetric.append(fileName)
-						#print("matched {} with existing file {}".format(fileName, existingFileName))
 						metricDict[existingFileName].append(metric)
 						alreadyFound = 1
 		for eachIndFileName in usedFiles:
@@ -721,18 +664,15 @@ def buildTable(version, sizeDict, smellsDict, churnDict,
 				metricDict[eachIndFileName].append(0)
 	for existingFileName in metricDict.keys():
 		if ".java" in existingFileName:
-			#print(existingFileName)
 			ruleIDsForSpecificFile = [x for x in ruleIDIssueDict.keys() if existingFileName in x]
 			splitUpFileNameAndIDs = [y.split("\t") for y in ruleIDsForSpecificFile]
 			splitUpFileNameAndIDs = sorted(splitUpFileNameAndIDs, key=lambda x: int(x[1]))
 			for eachThingy in splitUpFileNameAndIDs:
-				#print("{}...{}".format(eachThingy[0], eachThingy[1]))
 				combinedAgain = eachThingy[0] + "\t" + eachThingy[1]
 				numTimesRuleBroken = ruleIDIssueDict[combinedAgain]
 				if numTimesRuleBroken != 0:
 					print("rule {} for file {} has been broken {} times".format(eachThingy[1], eachThingy[0], numTimesRuleBroken))
 				metricDict[eachThingy[0]].append(numTimesRuleBroken)
-	#print("info on src/java/org/apache/jcs/engine/control/CompositeCache.java: {}".format(totTouchedDict["src/java/org/apache/jcs/engine/control/CompositeCache.java"]))
 	with open("ddmTable.csv", "a") as csv_file:
 		wr = csv.writer(csv_file, quoting=csv.QUOTE_ALL)
 		for fileName, metricList in metricDict.items():
@@ -748,7 +688,6 @@ def createCSVHeader(ruleIDs):
 		"Total Lines Touched", "Weighted Age"]
 	print(ruleIDs)
 	for eachRuleID in ruleIDs:
-		#print("another rule id")
 		metricNames.append(eachRuleID)
 	metricNames.append("Defective")
 	with open("ddmTable.csv", "wb") as csv_file:
@@ -757,7 +696,6 @@ def createCSVHeader(ruleIDs):
 		cwd = os.getcwd()
 		print("Printed metric names...")
 		print("working directory: {}".format(cwd))
-		#sys.exit(0)
 
 
 
@@ -779,7 +717,6 @@ def getTotalIssues(jiraInstance):
 		issues = jiraInstance.search_issues('project = ' + sys.argv[2] + ' AND issuetype = "Bug" AND status in (Resolved, Closed) ORDER BY resolved ASC', start_idx, block_size)
 		for issue in issues:
 			totalIssues.append(issue)
-		#totalIssues.append(issues)
 		if len(issues) == 0:
 		# Retrieve issues until there are no more to come
 			break
@@ -794,21 +731,17 @@ def getBugs(jiraURL, repo):
 	commitAuthorRegex = r'Author: ([ a-zA-Z]*)'
 	comHashHist = r'commit ([a-zA-Z0-9]*)'
 	allCommitsList = subprocess.check_output("git log --all --oneline", shell=True).split('\n')
-	#print("total commits: {}".format(len(allCommitsList)))
 	#Sets Jira instance in order to gather requirements from
 	jira = JIRA(jiraURL)
 	totalIssues = getTotalIssues(jira)
-	#print("Total issues: {}".format(len(totalIssues)))
 	for eachIssue in totalIssues:
 		try:
 			issueName = eachIssue.key.encode('utf-8').strip()
 			matchingCommits = [s for s in allCommitsList if issueName in s]
 			if len(matchingCommits) != 0:
-				#print("what am I doing: {}".format(matchingCommits[0].split()[0]))
 				fullCommitInstances = [repo.commit(x.split()[0]) for x in matchingCommits]
 				fullCommitInstances = sorted(fullCommitInstances, key=lambda x: x.committed_date)
 				firstRelCom = fullCommitInstances[0]
-				#print("for commit {}:".format(firstRelCom.hexsha))
 				dateOfCommit = datetime.fromtimestamp(firstRelCom.committed_date).strftime('%Y-%m-%d')
 				difference = subprocess.check_output("git diff -U0 {}^ {} | ../../bashScript.sh".format(firstRelCom.hexsha, firstRelCom.hexsha), shell=True)
 				linesChanged = difference.split('\n')
@@ -819,7 +752,6 @@ def getBugs(jiraURL, repo):
 				firstLineChanged = -1
 				currentLine = -1
 				for fileAndLineTuple in linesChanged:
-					#print("file and line: {}".format(fileAndLineTuple))
 					if currentFileName == "no file yet":
 						currentFileName = fileAndLineTuple[0]
 						firstLineChanged = fileAndLineTuple[1]
@@ -835,25 +767,18 @@ def getBugs(jiraURL, repo):
 				if firstLineChanged != -1:
 					fileAndLines.append((currentFileName, firstLineChanged, currentLine))
 				for fileTuple in fileAndLines:
-					#print("file Tuple: {}".format(fileTuple))
 					previousChanges = []
 					try:
-						#previousChanges = subprocess.check_output("git blame -L{},+{} {}^ -- {}".format(fileTuple[1], int(fileTuple[2]) - int(fileTuple[1]), firstRelCom.hexsha, fileTuple[0]), shell=True).split('\n')
 						p = subprocess.Popen(["git",  "blame",  "-L{},+{}".format(fileTuple[1], int(fileTuple[2]) - int(fileTuple[1])), "{}^".format(firstRelCom.hexsha), "--", "{}".format(fileTuple[0])], stdout=PIPE, stderr=PIPE)
 						output, error = p.communicate()
-						#print("output: {}".format(str(output)))
 						if p.returncode != 0: 
-							#print("thing failed %d %s %s" % (p.returncode, output, error))
 							numbers = [int(s) for s in str(error).split() if s.isdigit()]
 							if len(numbers) > 0:
 								maxLines = numbers[len(numbers)-1]
-								#print("max lines: {}".format(maxLines))
 								previousChanges = subprocess.check_output("git blame -L{},+{} {}^ -- {}".format(fileTuple[1], maxLines - int(fileTuple[2]) - 1, firstRelCom.hexsha, fileTuple[0]), shell=True).split('\n')
-								#print("ran max lines successfully.")
 						else:
 							previousChanges = str(output).split('\n')
 					except subprocess.CalledProcessError as someError:
-						#print("here is the exact error: |||{}|||".format(someError))
 						try:
 							previousChanges = subprocess.check_output("git blame -L{},+{} {}^ -- {}".format(fileTuple[1], 1, firstRelCom.hexsha, fileTuple[0]), shell=True).split('\n')
 						except:
@@ -867,10 +792,8 @@ def getBugs(jiraURL, repo):
 							if lineChangedComHash not in foundBugCommits:
 								try:
 									foundBugCommits.append(lineChangedComHash)
-									#print("old commit: {}".format(lineChangedComHash))
 									lineChangedCommitObj = repo.commit(lineChangedComHash)
 									correspondingTag = subprocess.check_output("git describe --contains {}".format(lineChangedCommitObj.hexsha), shell=True)
-									#print("corresponding tag: {}".format(correspondingTag)).split('~')[0]
 									if (correspondingTag, fileTuple[0]) in versionFileBugDict:
 										versionFileBugDict[(correspondingTag.split('~')[0], fileTuple[0])] += 1
 									else:
@@ -879,8 +802,6 @@ def getBugs(jiraURL, repo):
 									print("continuing...")
 		except subprocess.CalledProcessError as UnknownErr:
 			print("...")
-	#for tupleKey, value in versionFileBugDict.items():
-	#	print("num bugs for {}: {}".format(tupleKey, value))
 	return versionFileBugDict
 
 
@@ -892,11 +813,10 @@ def addBugsToCSV(versionFileBugDict):
 		for row in readCSV:
 			foundMatch = 0
 			for tupleKey, value in versionFileBugDict.items():
-				if tupleKey[0] == row[1] and tupleKey[1] == row[0]:#in row and tupleKey[1] in row:
+				if tupleKey[0] == row[1] and tupleKey[1] == row[0]:
 					if foundMatch == 1:
 						row[len(row)-1] = "Yes"
 					else:
-						#print("got a match")
 						foundMatch = 1
 						row.append("Yes")
 			if foundMatch == 0:
@@ -969,7 +889,7 @@ def main():
 
 	print("length of tag tuples: {}".format(len(tagTuples)))
 	createCSVHeader(ruleIDs)
-	for x in range(0, 2):#len(tagTuples)-1):
+	for x in range(0, len(tagTuples)-1):
 		p = multiprocessing.Process(target=run_for_a_version, name="Running One Version", args=(tagTuples, repo, ruleIDs, projectPath, continuedPath, githubURL, jiraURL, initialFolder, x, ))
 		p.start()
 		p.join(timeout=5000)
@@ -977,12 +897,9 @@ def main():
 			print("killing the process, took too long")
 			p.terminate()
 			p.join()
-			#sys.exit(0)
 		else:
 			print("process was already dead.")
-			#sys.exit(0)
 		
-		#run_for_a_version(tagTuples, repo, ruleIDs, projectPath, continuedPath, githubURL, jiraURL, initialFolder)
 		
 	versionFileBugDict = getBugs(jiraURL, repo)
 	addBugsToCSV(versionFileBugDict)
