@@ -456,6 +456,7 @@ def get_smells(tagTuple, fileSizes, tagTuples, repo, ruleIDs):
 	subprocess.check_output("git checkout {}".format(previousComHash), shell=True)
 	try:
 		p = subprocess.Popen(["mvn", "clean", "install", "-DskipTests=true", "-Dmaven.test.failure.ignore=true", "sonar:sonar", "-Dsonar.host.url=http://localhost:9000"], stdout=PIPE, stderr=PIPE)
+		#p = subprocess.Popen(["ant", "sonar"], stdout=PIPE, stderr=PIPE)
 		output, error = p.communicate()
 		if p.returncode != 0: 
 			print("sonarqube failed %d %s %s" % (p.returncode, output, error))
