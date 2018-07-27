@@ -1,0 +1,1 @@
+size at beginning of release seems to be working properly for every file.

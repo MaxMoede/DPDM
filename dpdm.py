@@ -48,6 +48,20 @@ def getReleases(projectPath, repo): #returns a list of all releases (tags) of th
 	tagTuples.sort(key=lambda x: datetime.strptime(x[2], '%Y-%m-%d'))
 	return tagTuples
 
+def check_for_name_duplicates(fileSizes):
+	overlaps = []
+	for eachFileTuple in fileSizes:
+		matches = [x for x in fileSizes if eachFileTuple[1] in x[1]]
+		if len(matches) > 1:
+			print("Found extra matches for {}".format(eachFileTuple))
+			overlaps.append(eachFileTuple)
+	for eachOverlap in overlaps:
+		fileSizes.remove(eachOverlap)
+		print("Item removed")
+	return fileSizes
+
+
+
 def sizeAtBeginningOfRelease(tagTuple): #calculates file sizes at the beginning of a release.
 	print("getting size at beginning of release...")
 	commitObj = tagTuple[1]
@@ -56,6 +70,8 @@ def sizeAtBeginningOfRelease(tagTuple): #calculates file sizes at the beginning 
 	foundFileNames = []
 	fileSizes = []
 
+
+	tagCommit = subprocess.check_output("git checkout -f {}".format(commitObj.hexsha), shell=True)
 	firstCmd = "git ls-files"
 	firstPs = subprocess.Popen(firstCmd,shell=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
 	listOfFileNames = firstPs.communicate()[0].split('\n')
@@ -81,10 +97,13 @@ def sizeAtBeginningOfRelease(tagTuple): #calculates file sizes at the beginning 
 				fileName = fileTuple[1]
 				foundFileNames.append(fileName)
 				fileSizes.append((tagName, fileName, linesOfCode))
+				#print("lines of code for {}: {}".format(fileName, linesOfCode))
 	for eachUnaccountedName in unaccountedFileNames:
 		if eachUnaccountedName not in foundFileNames:
 			fileSizes.append((tagName, eachUnaccountedName, 0))
-	return fileSizes
+	nonOverlappedFileSizes = check_for_name_duplicates(fileSizes)
+	#print("Size of this: {}".format(len(nonOverlappedFileSizes)))
+	return nonOverlappedFileSizes
 
 def num_revisions(tagTuple, fileSizes, tagTuples, repo): #calculates the number of revisions for files within a release period
 	print("getting number of revisions per file...")
@@ -432,6 +451,16 @@ def loc_max(tagTuple, fileSizes, tagTuples, repo):
 	return linesAddedDict
 
 
+def find_existing_file_name(listOfFileNames, partialFileName):
+	if partialFileName in listOfFileNames:
+		for eachFullName in listOfFileNames:
+			if partialFileName in eachFullName and partialFileName != eachFullName:
+				print("found full file name for {}: {}".format(partialFileName, eachFullName))
+				return eachFullName
+	else:
+		return None
+	return None
+
 def get_smells(tagTuple, fileSizes, tagTuples, repo, ruleIDs):
 	#Jacky: This will be the function that you will need to change to support ant builds.
 	#I apologize in advance for how bulky this function is.
@@ -455,19 +484,25 @@ def get_smells(tagTuple, fileSizes, tagTuples, repo, ruleIDs):
 	previousComHash = previousCommit.split()[1]
 	subprocess.check_output("git checkout {}".format(previousComHash), shell=True)
 	try:
-		p = subprocess.Popen(["mvn", "clean", "install", "-DskipTests=true", "-Dmaven.test.failure.ignore=true", "sonar:sonar", "-Dsonar.host.url=http://localhost:9000"], stdout=PIPE, stderr=PIPE)
+		p = subprocess.Popen(["mvn", "clean", "install", "-DskipTests=true", "-Dmaven.test.failure.ignore=true", "-U", "--fail-at-end", "sonar:sonar", "-Dsonar.host.url=http://localhost:9000"], stdout=PIPE, stderr=PIPE)
 		#p = subprocess.Popen(["ant", "sonar"], stdout=PIPE, stderr=PIPE)
 		output, error = p.communicate()
 		if p.returncode != 0: 
 			print("sonarqube failed %d %s %s" % (p.returncode, output, error))
 		else:
 			issues = get_issues()
-			if len(issues) < 0:
+			if len(issues) == 0:
 				print("getting smells failed.")
 			for eachIssue in issues:
 				if eachIssue is not None:
 					if eachIssue[2].decode("utf-8") not in alreadyUsedIssues:
 						fileName = eachIssue[0].decode("utf-8")
+						#COME BACK HERE
+						newFileName = find_existing_file_name(justFiles, fileName)
+						if newFileName is not None:
+							fileName = newFileName
+						if "HttpHeaders" in fileName:
+							print("Found httpheaders: {}".format(fileName))
 						foundAMatch = 0
 						correspondingRuleID = str(eachIssue[1])
 						for eachFileName, numIssues in issueDict.items():
@@ -497,9 +532,9 @@ def get_smells(tagTuple, fileSizes, tagTuples, repo, ruleIDs):
 	except subprocess.CalledProcessError as someError:
 		print(someError)
 		return issueDict
-	for eachFile, numIssues in issueDict.items():
-		if numIssues > 0:
-			print("issues for {}: {}".format(eachFile, numIssues))
+	#for eachFile, numIssues in issueDict.items():
+	#	if numIssues > 0:
+	#		print("issues for {}: {}".format(eachFile, numIssues))
 	for eachFileAndRuleID, numIssues in ruleIDIssueDict.items():
 		if numIssues > 0:
 			print("{}: {}".format(eachFileAndRuleID, numIssues))
@@ -641,8 +676,8 @@ def buildTable(version, sizeDict, smellsDict, churnDict,
 	numRevDict, numAuthorsDict, ageDict, totTouchedDict, 
 	weightedAgeDict))
 	allFileNames = makeFileNameList(eachFileDict)
-	for fileName, smellNum in smellsDict.items():
-		print("smells for {}: {}".format(smellNum, fileName))
+	#for fileName, smellNum in smellsDict.items():
+	#	print("smells for {}: {}".format(smellNum, fileName))
 	for fileName in allFileNames:
 		if fileName not in metricDict:
 			metricDict[fileName] = [fileName, version]
@@ -651,6 +686,9 @@ def buildTable(version, sizeDict, smellsDict, churnDict,
 		filesForThisMetric = []
 		for fileName, metric in singleMetricDictionary.items():
 			alreadyFound = 0
+			#if metric < 0:
+			#	print("negative metric for {}: {}, x value: {}".format(fileName, metric, x))
+				#print("version: {}".format(version))
 			for existingFileName, listOfMetrics in metricDict.items():
 				if alreadyFound == 0:
 					if fileName in existingFileName:
@@ -661,7 +699,7 @@ def buildTable(version, sizeDict, smellsDict, churnDict,
 						alreadyFound = 1
 		for eachIndFileName in usedFiles:
 			if eachIndFileName not in filesForThisMetric:
-				print("added 0 for {}".format(eachIndFileName))
+				#print("added 0 for {}".format(eachIndFileName))
 				metricDict[eachIndFileName].append(0)
 	for existingFileName in metricDict.keys():
 		if ".java" in existingFileName:
@@ -678,7 +716,11 @@ def buildTable(version, sizeDict, smellsDict, churnDict,
 		wr = csv.writer(csv_file, quoting=csv.QUOTE_ALL)
 		for fileName, metricList in metricDict.items():
 			print("length of row: {}".format(len(metricList)))
-			if ".java" in fileName and len(metricList) == 310 and metricList[2] > 0:#len(metricList) == 18 and metricList[2] > 0:
+			if ".java" in fileName and fileName in sizeDict and fileName in smellsDict:# and len(metricList) == 310 and metricList[2] > 0:
+				print("Filename: {}".format(fileName))
+				#for y in range(0, len(metricDict[fileName])):
+				#	if metricDict[fileName][y] < 0:
+				#		print("Negative value {} at y value {}".format(metricDict[fileName][y], y))
 				wr.writerow(metricDict[fileName])
 
 def createCSVHeader(ruleIDs):
@@ -706,6 +748,8 @@ def createSizeDict(fileSizes):
 	for item in fileSizes:
 		if item[1] not in fileSizeDict:
 			fileSizeDict[item[1]] = item[2]
+	#for fileKey, amount in fileSizeDict.items():
+	#	print("line amount for {}: {}".format(fileKey, amount))
 	return fileSizeDict
 
 
@@ -874,6 +918,10 @@ def run_for_a_version(tagTuples, repo, ruleIDs, projectPath, continuedPath, gith
 	ageDict = get_age(tagTuples[x], tagTuples, repo) #file dictionary, age in weeks
 	totTouchedDict = total_loc_touched(linesTouchedDict) #file dict, total Lines touched
 	weightedAgeDict = weighted_age(ageDict, totTouchedDict) #file dict, weighted age
+	#for eachFileName, someRandoVal in sizeDict.items():
+	#	if someRandoVal < 0:
+	#		print("This file already has a negative value: {} ... {}".format(eachFileName, someRandoVal))
+	#sys.exit(0)
 	buildTable(tagTuples[x][0], sizeDict, smellsDict, churnDict, maxChurnDict, avgChurnDict, chgSetDict, maxChgDict, avgChgDict, locAddedDict, maxLocDict, avgLocDict, numRevDict, numAuthorsDict, ageDict, totTouchedDict, weightedAgeDict, ruleIDIssueDict, ruleIDs)
 
 
@@ -890,7 +938,7 @@ def main():
 
 	print("length of tag tuples: {}".format(len(tagTuples)))
 	createCSVHeader(ruleIDs)
-	for x in range(0, len(tagTuples)-1):
+	for x in range(0, 1): #len(tagTuples)-1):
 		p = multiprocessing.Process(target=run_for_a_version, name="Running One Version", args=(tagTuples, repo, ruleIDs, projectPath, continuedPath, githubURL, jiraURL, initialFolder, x, ))
 		p.start()
 		p.join(timeout=5000)
