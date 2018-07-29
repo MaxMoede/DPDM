@@ -1,0 +1,513 @@
+2017.12.16 12:49:22 INFO  ce[][o.s.p.ProcessEntryPoint] Starting ce
+2017.12.16 12:49:22 INFO  ce[][o.s.ce.app.CeServer] Compute Engine starting up...
+2017.12.16 12:49:24 INFO  ce[][o.e.p.PluginsService] no modules loaded
+2017.12.16 12:49:24 INFO  ce[][o.e.p.PluginsService] loaded plugin [org.elasticsearch.index.reindex.ReindexPlugin]
+2017.12.16 12:49:24 INFO  ce[][o.e.p.PluginsService] loaded plugin [org.elasticsearch.join.ParentJoinPlugin]
+2017.12.16 12:49:24 INFO  ce[][o.e.p.PluginsService] loaded plugin [org.elasticsearch.percolator.PercolatorPlugin]
+2017.12.16 12:49:24 INFO  ce[][o.e.p.PluginsService] loaded plugin [org.elasticsearch.transport.Netty4Plugin]
+2017.12.16 12:49:26 INFO  ce[][o.s.s.e.EsClientProvider] Connected to local Elasticsearch: [127.0.0.1:9001]
+2017.12.16 12:49:26 INFO  ce[][o.sonar.db.Database] Create JDBC data source for jdbc:mysql://localhost:3306/sonar?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&useConfigs=maxPerformance&useSSL=false
+2017.12.16 12:49:30 INFO  ce[][o.s.s.p.ServerFileSystemImpl] SonarQube home: /Users/max/Documents/sonarDirectory/sonarqube-6.7
+2017.12.16 12:49:30 INFO  ce[][o.s.c.c.CePluginRepository] Load plugins
+2017.12.16 12:49:34 INFO  ce[][o.s.c.q.PurgeCeActivities] Delete the Compute Engine tasks created before Mon Jun 19 12:49:34 PDT 2017
+2017.12.16 12:49:34 INFO  ce[][o.s.ce.app.CeServer] Compute Engine is operational
+2017.12.16 14:35:04 INFO  ce[][o.s.ce.app.CeServer] Compute Engine is stopping...
+2017.12.16 14:35:04 INFO  ce[][o.s.c.t.CeProcessingSchedulerImpl] Waiting for workers to finish in-progress tasks
+2017.12.16 14:35:05 INFO  ce[][o.s.ce.app.CeServer] Compute Engine is stopped
+2017.12.16 14:36:24 INFO  ce[][o.s.p.ProcessEntryPoint] Starting ce
+2017.12.16 14:36:24 INFO  ce[][o.s.ce.app.CeServer] Compute Engine starting up...
+2017.12.16 14:36:25 INFO  ce[][o.e.p.PluginsService] no modules loaded
+2017.12.16 14:36:25 INFO  ce[][o.e.p.PluginsService] loaded plugin [org.elasticsearch.index.reindex.ReindexPlugin]
+2017.12.16 14:36:25 INFO  ce[][o.e.p.PluginsService] loaded plugin [org.elasticsearch.join.ParentJoinPlugin]
+2017.12.16 14:36:25 INFO  ce[][o.e.p.PluginsService] loaded plugin [org.elasticsearch.percolator.PercolatorPlugin]
+2017.12.16 14:36:25 INFO  ce[][o.e.p.PluginsService] loaded plugin [org.elasticsearch.transport.Netty4Plugin]
+2017.12.16 14:36:26 INFO  ce[][o.s.s.e.EsClientProvider] Connected to local Elasticsearch: [127.0.0.1:9001]
+2017.12.16 14:36:26 INFO  ce[][o.sonar.db.Database] Create JDBC data source for jdbc:mysql://localhost:3306/sonar?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&useConfigs=maxPerformance&useSSL=false
+2017.12.16 14:36:28 INFO  ce[][o.s.s.p.ServerFileSystemImpl] SonarQube home: /Users/max/Documents/sonarDirectory/sonarqube-6.7
+2017.12.16 14:36:28 INFO  ce[][o.s.c.c.CePluginRepository] Load plugins
+2017.12.16 14:36:30 INFO  ce[][o.s.c.q.PurgeCeActivities] Delete the Compute Engine tasks created before Mon Jun 19 14:36:30 PDT 2017
+2017.12.16 14:36:30 INFO  ce[][o.s.ce.app.CeServer] Compute Engine is operational
+2017.12.16 17:07:24 INFO  ce[][o.s.p.StopWatcher] Stopping process
+2017.12.16 17:07:24 INFO  ce[][o.s.ce.app.CeServer] Compute Engine is stopping...
+2017.12.16 17:07:24 INFO  ce[][o.s.c.t.CeProcessingSchedulerImpl] Waiting for workers to finish in-progress tasks
+2017.12.16 17:07:25 INFO  ce[][o.s.ce.app.CeServer] Compute Engine is stopped
+2017.12.16 17:08:13 INFO  ce[][o.s.p.ProcessEntryPoint] Starting ce
+2017.12.16 17:08:13 INFO  ce[][o.s.ce.app.CeServer] Compute Engine starting up...
+2017.12.16 17:08:14 INFO  ce[][o.e.p.PluginsService] no modules loaded
+2017.12.16 17:08:14 INFO  ce[][o.e.p.PluginsService] loaded plugin [org.elasticsearch.index.reindex.ReindexPlugin]
+2017.12.16 17:08:14 INFO  ce[][o.e.p.PluginsService] loaded plugin [org.elasticsearch.join.ParentJoinPlugin]
+2017.12.16 17:08:14 INFO  ce[][o.e.p.PluginsService] loaded plugin [org.elasticsearch.percolator.PercolatorPlugin]
+2017.12.16 17:08:14 INFO  ce[][o.e.p.PluginsService] loaded plugin [org.elasticsearch.transport.Netty4Plugin]
+2017.12.16 17:08:15 INFO  ce[][o.s.s.e.EsClientProvider] Connected to local Elasticsearch: [127.0.0.1:9001]
+2017.12.16 17:08:15 INFO  ce[][o.sonar.db.Database] Create JDBC data source for jdbc:mysql://localhost:3306/sonar?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&useConfigs=maxPerformance&useSSL=false
+2017.12.16 17:08:17 INFO  ce[][o.s.s.p.ServerFileSystemImpl] SonarQube home: /Users/max/Documents/sonarDirectory/sonarqube-6.7
+2017.12.16 17:08:17 INFO  ce[][o.s.c.c.CePluginRepository] Load plugins
+2017.12.16 17:08:19 INFO  ce[][o.s.c.q.PurgeCeActivities] Delete the Compute Engine tasks created before Mon Jun 19 17:08:19 PDT 2017
+2017.12.16 17:08:19 INFO  ce[][o.s.ce.app.CeServer] Compute Engine is operational
+2017.12.16 17:39:14 WARN  ce[][o.a.i.e.BaseExecutor] Unexpected exception on closing transaction.  Cause: java.sql.SQLException: Already closed.
+2017.12.16 17:39:14 ERROR ce[][o.s.c.t.CeWorkerImpl] Failed to pop the queue of analysis reports
+org.apache.ibatis.exceptions.PersistenceException: 
+### Error updating database.  Cause: org.apache.ibatis.transaction.TransactionException: Error configuring AutoCommit.  Your driver may not support getAutoCommit() or setAutoCommit(). Requested setting: false.  Cause: com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
+
+The last packet successfully received from the server was 18 milliseconds ago.  The last packet sent successfully to the server was 18 milliseconds ago.
+### Cause: org.apache.ibatis.transaction.TransactionException: Error configuring AutoCommit.  Your driver may not support getAutoCommit() or setAutoCommit(). Requested setting: false.  Cause: com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
+
+The last packet successfully received from the server was 18 milliseconds ago.  The last packet sent successfully to the server was 18 milliseconds ago.
+	at org.apache.ibatis.exceptions.ExceptionFactory.wrapException(ExceptionFactory.java:30)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:200)
+	at org.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:62)
+	at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:59)
+	at com.sun.proxy.$Proxy30.resetToPendingForWorker(Unknown Source)
+	at org.sonar.db.ce.CeQueueDao.resetToPendingForWorker(CeQueueDao.java:127)
+	at org.sonar.ce.queue.InternalCeQueueImpl.peek(InternalCeQueueImpl.java:80)
+	at org.sonar.ce.taskprocessor.CeWorkerImpl.tryAndFindTaskToExecute(CeWorkerImpl.java:106)
+	at org.sonar.ce.taskprocessor.CeWorkerImpl.findAndProcessTask(CeWorkerImpl.java:91)
+	at org.sonar.ce.taskprocessor.CeWorkerImpl.withCustomizedThreadName(CeWorkerImpl.java:81)
+	at org.sonar.ce.taskprocessor.CeWorkerImpl.call(CeWorkerImpl.java:73)
+	at org.sonar.ce.taskprocessor.CeWorkerImpl.call(CeWorkerImpl.java:43)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: org.apache.ibatis.transaction.TransactionException: Error configuring AutoCommit.  Your driver may not support getAutoCommit() or setAutoCommit(). Requested setting: false.  Cause: com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
+
+The last packet successfully received from the server was 18 milliseconds ago.  The last packet sent successfully to the server was 18 milliseconds ago.
+	at org.apache.ibatis.transaction.jdbc.JdbcTransaction.setDesiredAutoCommit(JdbcTransaction.java:107)
+	at org.apache.ibatis.transaction.jdbc.JdbcTransaction.openConnection(JdbcTransaction.java:142)
+	at org.apache.ibatis.transaction.jdbc.JdbcTransaction.getConnection(JdbcTransaction.java:60)
+	at org.apache.ibatis.executor.BaseExecutor.getConnection(BaseExecutor.java:336)
+	at org.apache.ibatis.executor.ReuseExecutor.prepareStatement(ReuseExecutor.java:88)
+	at org.apache.ibatis.executor.ReuseExecutor.doUpdate(ReuseExecutor.java:51)
+	at org.apache.ibatis.executor.BaseExecutor.update(BaseExecutor.java:117)
+	at org.apache.ibatis.executor.CachingExecutor.update(CachingExecutor.java:76)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:198)
+	... 18 common frames omitted
+Caused by: com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
+
+The last packet successfully received from the server was 18 milliseconds ago.  The last packet sent successfully to the server was 18 milliseconds ago.
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:425)
+	at com.mysql.jdbc.SQLError.createCommunicationsException(SQLError.java:989)
+	at com.mysql.jdbc.MysqlIO.reuseAndReadPacket(MysqlIO.java:3559)
+	at com.mysql.jdbc.MysqlIO.reuseAndReadPacket(MysqlIO.java:3459)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3900)
+	at com.mysql.jdbc.MysqlIO.sendCommand(MysqlIO.java:2527)
+	at com.mysql.jdbc.MysqlIO.sqlQueryDirect(MysqlIO.java:2680)
+	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2486)
+	at com.mysql.jdbc.ConnectionImpl.setAutoCommit(ConnectionImpl.java:4778)
+	at org.apache.commons.dbcp.DelegatingConnection.setAutoCommit(DelegatingConnection.java:371)
+	at org.apache.commons.dbcp.PoolingDataSource$PoolGuardConnectionWrapper.setAutoCommit(PoolingDataSource.java:328)
+	at org.apache.ibatis.transaction.jdbc.JdbcTransaction.setDesiredAutoCommit(JdbcTransaction.java:102)
+	... 26 common frames omitted
+Caused by: java.io.EOFException: Can not read response from server. Expected to read 4 bytes, read 0 bytes before connection was unexpectedly lost.
+	at com.mysql.jdbc.MysqlIO.readFully(MysqlIO.java:3011)
+	at com.mysql.jdbc.MysqlIO.reuseAndReadPacket(MysqlIO.java:3469)
+	... 35 common frames omitted
+2017.12.16 17:39:17 ERROR ce[][o.s.c.t.CeWorkerImpl] Failed to pop the queue of analysis reports
+org.apache.ibatis.exceptions.PersistenceException: 
+### Error updating database.  Cause: com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+### Cause: com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at org.apache.ibatis.exceptions.ExceptionFactory.wrapException(ExceptionFactory.java:30)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:200)
+	at org.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:62)
+	at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:59)
+	at com.sun.proxy.$Proxy30.resetToPendingForWorker(Unknown Source)
+	at org.sonar.db.ce.CeQueueDao.resetToPendingForWorker(CeQueueDao.java:127)
+	at org.sonar.ce.queue.InternalCeQueueImpl.peek(InternalCeQueueImpl.java:80)
+	at org.sonar.ce.taskprocessor.CeWorkerImpl.tryAndFindTaskToExecute(CeWorkerImpl.java:106)
+	at org.sonar.ce.taskprocessor.CeWorkerImpl.findAndProcessTask(CeWorkerImpl.java:91)
+	at org.sonar.ce.taskprocessor.CeWorkerImpl.withCustomizedThreadName(CeWorkerImpl.java:81)
+	at org.sonar.ce.taskprocessor.CeWorkerImpl.call(CeWorkerImpl.java:73)
+	at org.sonar.ce.taskprocessor.CeWorkerImpl.call(CeWorkerImpl.java:43)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:425)
+	at com.mysql.jdbc.SQLError.createCommunicationsException(SQLError.java:989)
+	at com.mysql.jdbc.MysqlIO.<init>(MysqlIO.java:341)
+	at com.mysql.jdbc.ConnectionImpl.coreConnect(ConnectionImpl.java:2192)
+	at com.mysql.jdbc.ConnectionImpl.connectOneTryOnly(ConnectionImpl.java:2225)
+	at com.mysql.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:2024)
+	at com.mysql.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:779)
+	at com.mysql.jdbc.JDBC4Connection.<init>(JDBC4Connection.java:47)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:425)
+	at com.mysql.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:389)
+	at com.mysql.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:330)
+	at org.apache.commons.dbcp.DriverConnectionFactory.createConnection(DriverConnectionFactory.java:38)
+	at org.apache.commons.dbcp.PoolableConnectionFactory.makeObject(PoolableConnectionFactory.java:582)
+	at org.apache.commons.pool.impl.GenericObjectPool.borrowObject(GenericObjectPool.java:1148)
+	at org.apache.commons.dbcp.PoolingDataSource.getConnection(PoolingDataSource.java:106)
+	at org.apache.commons.dbcp.BasicDataSource.getConnection(BasicDataSource.java:1044)
+	at org.sonar.db.profiling.NullConnectionInterceptor.getConnection(NullConnectionInterceptor.java:31)
+	at org.sonar.db.profiling.ProfiledDataSource.getConnection(ProfiledDataSource.java:323)
+	at org.apache.ibatis.transaction.jdbc.JdbcTransaction.openConnection(JdbcTransaction.java:138)
+	at org.apache.ibatis.transaction.jdbc.JdbcTransaction.getConnection(JdbcTransaction.java:60)
+	at org.apache.ibatis.executor.BaseExecutor.getConnection(BaseExecutor.java:336)
+	at org.apache.ibatis.executor.ReuseExecutor.prepareStatement(ReuseExecutor.java:88)
+	at org.apache.ibatis.executor.ReuseExecutor.doUpdate(ReuseExecutor.java:51)
+	at org.apache.ibatis.executor.BaseExecutor.update(BaseExecutor.java:117)
+	at org.apache.ibatis.executor.CachingExecutor.update(CachingExecutor.java:76)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:198)
+	... 18 common frames omitted
+Caused by: java.net.ConnectException: Connection refused
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at com.mysql.jdbc.StandardSocketFactory.connect(StandardSocketFactory.java:211)
+	at com.mysql.jdbc.MysqlIO.<init>(MysqlIO.java:300)
+	... 45 common frames omitted
+2017.12.16 17:39:19 ERROR ce[][o.s.c.t.CeWorkerImpl] Failed to pop the queue of analysis reports
+org.apache.ibatis.exceptions.PersistenceException: 
+### Error updating database.  Cause: com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+### Cause: com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at org.apache.ibatis.exceptions.ExceptionFactory.wrapException(ExceptionFactory.java:30)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:200)
+	at org.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:62)
+	at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:59)
+	at com.sun.proxy.$Proxy30.resetToPendingForWorker(Unknown Source)
+	at org.sonar.db.ce.CeQueueDao.resetToPendingForWorker(CeQueueDao.java:127)
+	at org.sonar.ce.queue.InternalCeQueueImpl.peek(InternalCeQueueImpl.java:80)
+	at org.sonar.ce.taskprocessor.CeWorkerImpl.tryAndFindTaskToExecute(CeWorkerImpl.java:106)
+	at org.sonar.ce.taskprocessor.CeWorkerImpl.findAndProcessTask(CeWorkerImpl.java:91)
+	at org.sonar.ce.taskprocessor.CeWorkerImpl.withCustomizedThreadName(CeWorkerImpl.java:81)
+	at org.sonar.ce.taskprocessor.CeWorkerImpl.call(CeWorkerImpl.java:73)
+	at org.sonar.ce.taskprocessor.CeWorkerImpl.call(CeWorkerImpl.java:43)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:425)
+	at com.mysql.jdbc.SQLError.createCommunicationsException(SQLError.java:989)
+	at com.mysql.jdbc.MysqlIO.<init>(MysqlIO.java:341)
+	at com.mysql.jdbc.ConnectionImpl.coreConnect(ConnectionImpl.java:2192)
+	at com.mysql.jdbc.ConnectionImpl.connectOneTryOnly(ConnectionImpl.java:2225)
+	at com.mysql.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:2024)
+	at com.mysql.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:779)
+	at com.mysql.jdbc.JDBC4Connection.<init>(JDBC4Connection.java:47)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:425)
+	at com.mysql.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:389)
+	at com.mysql.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:330)
+	at org.apache.commons.dbcp.DriverConnectionFactory.createConnection(DriverConnectionFactory.java:38)
+	at org.apache.commons.dbcp.PoolableConnectionFactory.makeObject(PoolableConnectionFactory.java:582)
+	at org.apache.commons.pool.impl.GenericObjectPool.borrowObject(GenericObjectPool.java:1148)
+	at org.apache.commons.dbcp.PoolingDataSource.getConnection(PoolingDataSource.java:106)
+	at org.apache.commons.dbcp.BasicDataSource.getConnection(BasicDataSource.java:1044)
+	at org.sonar.db.profiling.NullConnectionInterceptor.getConnection(NullConnectionInterceptor.java:31)
+	at org.sonar.db.profiling.ProfiledDataSource.getConnection(ProfiledDataSource.java:323)
+	at org.apache.ibatis.transaction.jdbc.JdbcTransaction.openConnection(JdbcTransaction.java:138)
+	at org.apache.ibatis.transaction.jdbc.JdbcTransaction.getConnection(JdbcTransaction.java:60)
+	at org.apache.ibatis.executor.BaseExecutor.getConnection(BaseExecutor.java:336)
+	at org.apache.ibatis.executor.ReuseExecutor.prepareStatement(ReuseExecutor.java:88)
+	at org.apache.ibatis.executor.ReuseExecutor.doUpdate(ReuseExecutor.java:51)
+	at org.apache.ibatis.executor.BaseExecutor.update(BaseExecutor.java:117)
+	at org.apache.ibatis.executor.CachingExecutor.update(CachingExecutor.java:76)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:198)
+	... 18 common frames omitted
+Caused by: java.net.ConnectException: Connection refused
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at com.mysql.jdbc.StandardSocketFactory.connect(StandardSocketFactory.java:211)
+	at com.mysql.jdbc.MysqlIO.<init>(MysqlIO.java:300)
+	... 45 common frames omitted
+2017.12.16 17:39:19 WARN  ce[][o.s.c.c.CeCleaningSchedulerImpl] Failed to cancel worn out tasks
+org.apache.ibatis.exceptions.PersistenceException: 
+### Error querying database.  Cause: com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+### The error may exist in org.sonar.db.ce.CeQueueMapper
+### The error may involve org.sonar.db.ce.CeQueueMapper.selectPendingByMinimumExecutionCount
+### The error occurred while executing a query
+### Cause: com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at org.apache.ibatis.exceptions.ExceptionFactory.wrapException(ExceptionFactory.java:30)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:150)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:141)
+	at org.apache.ibatis.binding.MapperMethod.executeForMany(MapperMethod.java:137)
+	at org.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:75)
+	at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:59)
+	at com.sun.proxy.$Proxy30.selectPendingByMinimumExecutionCount(Unknown Source)
+	at org.sonar.db.ce.CeQueueDao.selectPendingByMinimumExecutionCount(CeQueueDao.java:86)
+	at org.sonar.ce.queue.InternalCeQueueImpl.cancelWornOuts(InternalCeQueueImpl.java:171)
+	at org.sonar.ce.cleaning.CeCleaningSchedulerImpl.cancelWornOuts(CeCleaningSchedulerImpl.java:73)
+	at org.sonar.ce.cleaning.CeCleaningSchedulerImpl.cleanCeQueue(CeCleaningSchedulerImpl.java:62)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.runAndReset(FutureTask.java:308)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$301(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:294)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:425)
+	at com.mysql.jdbc.SQLError.createCommunicationsException(SQLError.java:989)
+	at com.mysql.jdbc.MysqlIO.<init>(MysqlIO.java:341)
+	at com.mysql.jdbc.ConnectionImpl.coreConnect(ConnectionImpl.java:2192)
+	at com.mysql.jdbc.ConnectionImpl.connectOneTryOnly(ConnectionImpl.java:2225)
+	at com.mysql.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:2024)
+	at com.mysql.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:779)
+	at com.mysql.jdbc.JDBC4Connection.<init>(JDBC4Connection.java:47)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:425)
+	at com.mysql.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:389)
+	at com.mysql.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:330)
+	at org.apache.commons.dbcp.DriverConnectionFactory.createConnection(DriverConnectionFactory.java:38)
+	at org.apache.commons.dbcp.PoolableConnectionFactory.makeObject(PoolableConnectionFactory.java:582)
+	at org.apache.commons.pool.impl.GenericObjectPool.borrowObject(GenericObjectPool.java:1148)
+	at org.apache.commons.dbcp.PoolingDataSource.getConnection(PoolingDataSource.java:106)
+	at org.apache.commons.dbcp.BasicDataSource.getConnection(BasicDataSource.java:1044)
+	at org.sonar.db.profiling.NullConnectionInterceptor.getConnection(NullConnectionInterceptor.java:31)
+	at org.sonar.db.profiling.ProfiledDataSource.getConnection(ProfiledDataSource.java:323)
+	at org.apache.ibatis.transaction.jdbc.JdbcTransaction.openConnection(JdbcTransaction.java:138)
+	at org.apache.ibatis.transaction.jdbc.JdbcTransaction.getConnection(JdbcTransaction.java:60)
+	at org.apache.ibatis.executor.BaseExecutor.getConnection(BaseExecutor.java:336)
+	at org.apache.ibatis.executor.ReuseExecutor.prepareStatement(ReuseExecutor.java:88)
+	at org.apache.ibatis.executor.ReuseExecutor.doQuery(ReuseExecutor.java:59)
+	at org.apache.ibatis.executor.BaseExecutor.queryFromDatabase(BaseExecutor.java:324)
+	at org.apache.ibatis.executor.BaseExecutor.query(BaseExecutor.java:156)
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:109)
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:83)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:148)
+	... 16 common frames omitted
+Caused by: java.net.ConnectException: Connection refused
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at com.mysql.jdbc.StandardSocketFactory.connect(StandardSocketFactory.java:211)
+	at com.mysql.jdbc.MysqlIO.<init>(MysqlIO.java:300)
+	... 45 common frames omitted
+2017.12.16 17:39:20 WARN  ce[][o.s.c.c.CeCleaningSchedulerImpl] Failed to reset tasks with unknown worker UUIDs
+org.apache.ibatis.exceptions.PersistenceException: 
+### Error updating database.  Cause: com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+### Cause: com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at org.apache.ibatis.exceptions.ExceptionFactory.wrapException(ExceptionFactory.java:30)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:200)
+	at org.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:62)
+	at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:59)
+	at com.sun.proxy.$Proxy30.resetTasksWithUnknownWorkerUUIDs(Unknown Source)
+	at org.sonar.db.ce.CeQueueDao.lambda$resetTasksWithUnknownWorkerUUIDs$0(CeQueueDao.java:95)
+	at org.sonar.db.DatabaseUtils.executeLargeUpdates(DatabaseUtils.java:166)
+	at org.sonar.db.DatabaseUtils.executeLargeUpdates(DatabaseUtils.java:147)
+	at org.sonar.db.ce.CeQueueDao.resetTasksWithUnknownWorkerUUIDs(CeQueueDao.java:94)
+	at org.sonar.ce.queue.InternalCeQueueImpl.resetTasksWithUnknownWorkerUUIDs(InternalCeQueueImpl.java:184)
+	at org.sonar.ce.cleaning.CeCleaningSchedulerImpl.resetTasksWithUnknownWorkerUUIDs(CeCleaningSchedulerImpl.java:82)
+	at org.sonar.ce.cleaning.CeCleaningSchedulerImpl.cleanCeQueue(CeCleaningSchedulerImpl.java:63)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.runAndReset(FutureTask.java:308)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$301(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:294)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:425)
+	at com.mysql.jdbc.SQLError.createCommunicationsException(SQLError.java:989)
+	at com.mysql.jdbc.MysqlIO.<init>(MysqlIO.java:341)
+	at com.mysql.jdbc.ConnectionImpl.coreConnect(ConnectionImpl.java:2192)
+	at com.mysql.jdbc.ConnectionImpl.connectOneTryOnly(ConnectionImpl.java:2225)
+	at com.mysql.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:2024)
+	at com.mysql.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:779)
+	at com.mysql.jdbc.JDBC4Connection.<init>(JDBC4Connection.java:47)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:425)
+	at com.mysql.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:389)
+	at com.mysql.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:330)
+	at org.apache.commons.dbcp.DriverConnectionFactory.createConnection(DriverConnectionFactory.java:38)
+	at org.apache.commons.dbcp.PoolableConnectionFactory.makeObject(PoolableConnectionFactory.java:582)
+	at org.apache.commons.pool.impl.GenericObjectPool.borrowObject(GenericObjectPool.java:1148)
+	at org.apache.commons.dbcp.PoolingDataSource.getConnection(PoolingDataSource.java:106)
+	at org.apache.commons.dbcp.BasicDataSource.getConnection(BasicDataSource.java:1044)
+	at org.sonar.db.profiling.NullConnectionInterceptor.getConnection(NullConnectionInterceptor.java:31)
+	at org.sonar.db.profiling.ProfiledDataSource.getConnection(ProfiledDataSource.java:323)
+	at org.apache.ibatis.transaction.jdbc.JdbcTransaction.openConnection(JdbcTransaction.java:138)
+	at org.apache.ibatis.transaction.jdbc.JdbcTransaction.getConnection(JdbcTransaction.java:60)
+	at org.apache.ibatis.executor.BaseExecutor.getConnection(BaseExecutor.java:336)
+	at org.apache.ibatis.executor.ReuseExecutor.prepareStatement(ReuseExecutor.java:88)
+	at org.apache.ibatis.executor.ReuseExecutor.doUpdate(ReuseExecutor.java:51)
+	at org.apache.ibatis.executor.BaseExecutor.update(BaseExecutor.java:117)
+	at org.apache.ibatis.executor.CachingExecutor.update(CachingExecutor.java:76)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:198)
+	... 17 common frames omitted
+Caused by: java.net.ConnectException: Connection refused
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at com.mysql.jdbc.StandardSocketFactory.connect(StandardSocketFactory.java:211)
+	at com.mysql.jdbc.MysqlIO.<init>(MysqlIO.java:300)
+	... 44 common frames omitted
+2017.12.16 17:39:21 ERROR ce[][o.s.c.t.CeWorkerImpl] Failed to pop the queue of analysis reports
+org.apache.ibatis.exceptions.PersistenceException: 
+### Error updating database.  Cause: com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+### Cause: com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at org.apache.ibatis.exceptions.ExceptionFactory.wrapException(ExceptionFactory.java:30)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:200)
+	at org.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:62)
+	at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:59)
+	at com.sun.proxy.$Proxy30.resetToPendingForWorker(Unknown Source)
+	at org.sonar.db.ce.CeQueueDao.resetToPendingForWorker(CeQueueDao.java:127)
+	at org.sonar.ce.queue.InternalCeQueueImpl.peek(InternalCeQueueImpl.java:80)
+	at org.sonar.ce.taskprocessor.CeWorkerImpl.tryAndFindTaskToExecute(CeWorkerImpl.java:106)
+	at org.sonar.ce.taskprocessor.CeWorkerImpl.findAndProcessTask(CeWorkerImpl.java:91)
+	at org.sonar.ce.taskprocessor.CeWorkerImpl.withCustomizedThreadName(CeWorkerImpl.java:81)
+	at org.sonar.ce.taskprocessor.CeWorkerImpl.call(CeWorkerImpl.java:73)
+	at org.sonar.ce.taskprocessor.CeWorkerImpl.call(CeWorkerImpl.java:43)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:425)
+	at com.mysql.jdbc.SQLError.createCommunicationsException(SQLError.java:989)
+	at com.mysql.jdbc.MysqlIO.<init>(MysqlIO.java:341)
+	at com.mysql.jdbc.ConnectionImpl.coreConnect(ConnectionImpl.java:2192)
+	at com.mysql.jdbc.ConnectionImpl.connectOneTryOnly(ConnectionImpl.java:2225)
+	at com.mysql.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:2024)
+	at com.mysql.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:779)
+	at com.mysql.jdbc.JDBC4Connection.<init>(JDBC4Connection.java:47)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:425)
+	at com.mysql.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:389)
+	at com.mysql.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:330)
+	at org.apache.commons.dbcp.DriverConnectionFactory.createConnection(DriverConnectionFactory.java:38)
+	at org.apache.commons.dbcp.PoolableConnectionFactory.makeObject(PoolableConnectionFactory.java:582)
+	at org.apache.commons.pool.impl.GenericObjectPool.borrowObject(GenericObjectPool.java:1148)
+	at org.apache.commons.dbcp.PoolingDataSource.getConnection(PoolingDataSource.java:106)
+	at org.apache.commons.dbcp.BasicDataSource.getConnection(BasicDataSource.java:1044)
+	at org.sonar.db.profiling.NullConnectionInterceptor.getConnection(NullConnectionInterceptor.java:31)
+	at org.sonar.db.profiling.ProfiledDataSource.getConnection(ProfiledDataSource.java:323)
+	at org.apache.ibatis.transaction.jdbc.JdbcTransaction.openConnection(JdbcTransaction.java:138)
+	at org.apache.ibatis.transaction.jdbc.JdbcTransaction.getConnection(JdbcTransaction.java:60)
+	at org.apache.ibatis.executor.BaseExecutor.getConnection(BaseExecutor.java:336)
+	at org.apache.ibatis.executor.ReuseExecutor.prepareStatement(ReuseExecutor.java:88)
+	at org.apache.ibatis.executor.ReuseExecutor.doUpdate(ReuseExecutor.java:51)
+	at org.apache.ibatis.executor.BaseExecutor.update(BaseExecutor.java:117)
+	at org.apache.ibatis.executor.CachingExecutor.update(CachingExecutor.java:76)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:198)
+	... 18 common frames omitted
+Caused by: java.net.ConnectException: Connection refused
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at com.mysql.jdbc.StandardSocketFactory.connect(StandardSocketFactory.java:211)
+	at com.mysql.jdbc.MysqlIO.<init>(MysqlIO.java:300)
+	... 45 common frames omitted
+2017.12.16 17:39:23 INFO  ce[][o.s.p.StopWatcher] Stopping process
+2017.12.16 17:39:23 INFO  ce[][o.s.ce.app.CeServer] Compute Engine is stopping...
+2017.12.16 17:39:23 INFO  ce[][o.s.c.t.CeProcessingSchedulerImpl] Waiting for workers to finish in-progress tasks
+2017.12.16 17:39:24 INFO  ce[][o.s.ce.app.CeServer] Compute Engine is stopped
+2017.12.16 17:42:59 INFO  ce[][o.s.p.ProcessEntryPoint] Starting ce
+2017.12.16 17:42:59 INFO  ce[][o.s.ce.app.CeServer] Compute Engine starting up...
+2017.12.16 17:42:59 INFO  ce[][o.e.p.PluginsService] no modules loaded
+2017.12.16 17:42:59 INFO  ce[][o.e.p.PluginsService] loaded plugin [org.elasticsearch.index.reindex.ReindexPlugin]
+2017.12.16 17:42:59 INFO  ce[][o.e.p.PluginsService] loaded plugin [org.elasticsearch.join.ParentJoinPlugin]
+2017.12.16 17:42:59 INFO  ce[][o.e.p.PluginsService] loaded plugin [org.elasticsearch.percolator.PercolatorPlugin]
+2017.12.16 17:42:59 INFO  ce[][o.e.p.PluginsService] loaded plugin [org.elasticsearch.transport.Netty4Plugin]
+2017.12.16 17:43:02 INFO  ce[][o.s.s.e.EsClientProvider] Connected to local Elasticsearch: [127.0.0.1:9001]
+2017.12.16 17:43:02 INFO  ce[][o.sonar.db.Database] Create JDBC data source for jdbc:mysql://localhost:3306/sonar?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&useConfigs=maxPerformance&useSSL=false
+2017.12.16 17:43:07 INFO  ce[][o.s.s.p.ServerFileSystemImpl] SonarQube home: /Users/max/Documents/sonarDirectory/sonarqube-6.7
+2017.12.16 17:43:07 INFO  ce[][o.s.c.c.CePluginRepository] Load plugins
+2017.12.16 17:43:10 INFO  ce[][o.s.c.q.PurgeCeActivities] Delete the Compute Engine tasks created before Mon Jun 19 17:43:10 PDT 2017
+2017.12.16 17:43:10 INFO  ce[][o.s.ce.app.CeServer] Compute Engine is operational
+2017.12.16 17:48:17 INFO  ce[AWBiKEp7tXzCu-7yIhRx][o.s.c.t.CeWorkerImpl] Execute task | project=org.apache.tika:tika | type=REPORT | id=AWBiKEp7tXzCu-7yIhRx
+2017.12.16 17:49:09 INFO  ce[AWBiKEp7tXzCu-7yIhRx][o.s.c.t.CeWorkerImpl] Executed task | project=org.apache.tika:tika | type=REPORT | id=AWBiKEp7tXzCu-7yIhRx | time=51681ms

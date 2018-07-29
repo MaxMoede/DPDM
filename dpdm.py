@@ -480,58 +480,64 @@ def get_smells(tagTuple, fileSizes, tagTuples, repo, ruleIDs):
 		for eachRuleID in ruleIDs:
 			fileAndRuleID = file + "\t" + str(eachRuleID)
 			ruleIDIssueDict[fileAndRuleID] = 0
-	previousCommit = subprocess.check_output("git show {}^1".format(commitHash), shell=True)
-	previousComHash = previousCommit.split()[1]
-	subprocess.check_output("git checkout {}".format(previousComHash), shell=True)
-	try:
-		p = subprocess.Popen(["mvn", "clean", "install", "-DskipTests=true", "-Dmaven.test.failure.ignore=true", "-U", "--fail-at-end", "sonar:sonar", "-Dsonar.host.url=http://localhost:9000"], stdout=PIPE, stderr=PIPE)
-		#p = subprocess.Popen(["ant", "sonar"], stdout=PIPE, stderr=PIPE)
-		output, error = p.communicate()
-		if p.returncode != 0: 
-			print("sonarqube failed %d %s %s" % (p.returncode, output, error))
-		else:
-			issues = get_issues()
-			if len(issues) == 0:
-				print("getting smells failed.")
-			for eachIssue in issues:
-				if eachIssue is not None:
-					if eachIssue[2].decode("utf-8") not in alreadyUsedIssues:
-						fileName = eachIssue[0].decode("utf-8")
-						#COME BACK HERE
-						newFileName = find_existing_file_name(justFiles, fileName)
-						if newFileName is not None:
-							fileName = newFileName
-						if "HttpHeaders" in fileName:
-							print("Found httpheaders: {}".format(fileName))
-						foundAMatch = 0
-						correspondingRuleID = str(eachIssue[1])
-						for eachFileName, numIssues in issueDict.items():
-							fileAndRuleID = eachFileName + "\t" + correspondingRuleID
-							if fileName in eachFileName and foundAMatch == 0:
-								issueDict[eachFileName] += 1
-								if fileAndRuleID in ruleIDIssueDict:
-									ruleIDIssueDict[fileAndRuleID] += 1
-								else:
-									ruleIDIssueDict[fileAndRuleID] = 1
-								foundAMatch = 1
-						if foundAMatch == 0:
-							missingFileAndRuleID = fileName + "\t" + correspondingRuleID
-							issueDict[fileName] = 1
-							ruleIDIssueDict[missingFileAndRuleID] = 1
+	#previousCommit = subprocess.check_output("git show {}^1".format(commitHash), shell=True)
+	#previousComHash = previousCommit.split()[1]
+	#subprocess.check_output("git checkout {}".format(commitObj.hexsha), shell=True)#previousComHash), shell=True)
+	checkoutCorrectVersion = subprocess.Popen(["git", "checkout", "{}".format(commitObj.hexsha)], stdout=PIPE, stderr=PIPE)
+	versionOutput, versionError = checkoutCorrectVersion.communicate()
+	if checkoutCorrectVersion.returncode != 0:
+		print("git checkout failed.")
+		return issueDict, ruleIDIssueDict
+	else:
+		try:
+			p = subprocess.Popen(["mvn", "clean", "install", "-DskipTests=true", "-Dmaven.test.failure.ignore=true", "-U", "--fail-at-end", "sonar:sonar", "-Dsonar.host.url=http://localhost:9000"], stdout=PIPE, stderr=PIPE)
+			#p = subprocess.Popen(["ant", "sonar"], stdout=PIPE, stderr=PIPE)
+			output, error = p.communicate()
+			if p.returncode != 0: 
+				print("sonarqube failed %d %s %s" % (p.returncode, output, error))
+			else:
+				issues = get_issues()
+				if len(issues) == 0:
+					print("getting smells failed.")
+				for eachIssue in issues:
+					if eachIssue is not None:
+						if eachIssue[2].decode("utf-8") not in alreadyUsedIssues:
+							fileName = eachIssue[0].decode("utf-8")
+							#COME BACK HERE
+							newFileName = find_existing_file_name(justFiles, fileName)
+							if newFileName is not None:
+								fileName = newFileName
+							if "HttpHeaders" in fileName:
+								print("Found httpheaders: {}".format(fileName))
+							foundAMatch = 0
+							correspondingRuleID = str(eachIssue[1])
+							for eachFileName, numIssues in issueDict.items():
+								fileAndRuleID = eachFileName + "\t" + correspondingRuleID
+								if fileName in eachFileName and foundAMatch == 0:
+									issueDict[eachFileName] += 1
+									if fileAndRuleID in ruleIDIssueDict:
+										ruleIDIssueDict[fileAndRuleID] += 1
+									else:
+										ruleIDIssueDict[fileAndRuleID] = 1
+									foundAMatch = 1
+							if foundAMatch == 0:
+								missingFileAndRuleID = fileName + "\t" + correspondingRuleID
+								issueDict[fileName] = 1
+								ruleIDIssueDict[missingFileAndRuleID] = 1
 
-						alreadyUsedIssues[eachIssue[2].decode("utf-8")] = "Used"
-			stringRuleIDs = [str(i) for i in ruleIDs]
-			for eachFileName in issueDict.keys():
-				SpecificFileRuleIDList = [x for x in ruleIDIssueDict.keys() if eachFileName in x]
-				combinedSpecificList = '\t'.join(SpecificFileRuleIDList)
-				missingRuleIDs = [j for j in stringRuleIDs if j not in combinedSpecificList]
-				for eachMissingRuleID in missingRuleIDs:
-					newCombinedFileAndIssue = eachFileName + "\t" + eachMissingRuleID
-					ruleIDIssueDict[newCombinedFileAndIssue] = 0
+							alreadyUsedIssues[eachIssue[2].decode("utf-8")] = "Used"
+				stringRuleIDs = [str(i) for i in ruleIDs]
+				for eachFileName in issueDict.keys():
+					SpecificFileRuleIDList = [x for x in ruleIDIssueDict.keys() if eachFileName in x]
+					combinedSpecificList = '\t'.join(SpecificFileRuleIDList)
+					missingRuleIDs = [j for j in stringRuleIDs if j not in combinedSpecificList]
+					for eachMissingRuleID in missingRuleIDs:
+						newCombinedFileAndIssue = eachFileName + "\t" + eachMissingRuleID
+						ruleIDIssueDict[newCombinedFileAndIssue] = 0
 
-	except subprocess.CalledProcessError as someError:
-		print(someError)
-		return issueDict
+		except subprocess.CalledProcessError as someError:
+			print(someError)
+			return issueDict, ruleIDIssueDict
 	#for eachFile, numIssues in issueDict.items():
 	#	if numIssues > 0:
 	#		print("issues for {}: {}".format(eachFile, numIssues))
@@ -938,7 +944,7 @@ def main():
 
 	print("length of tag tuples: {}".format(len(tagTuples)))
 	createCSVHeader(ruleIDs)
-	for x in range(0, 1): #len(tagTuples)-1):
+	for x in range(0, 5):#len(tagTuples)-1):
 		p = multiprocessing.Process(target=run_for_a_version, name="Running One Version", args=(tagTuples, repo, ruleIDs, projectPath, continuedPath, githubURL, jiraURL, initialFolder, x, ))
 		p.start()
 		p.join(timeout=5000)

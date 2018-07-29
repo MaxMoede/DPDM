@@ -1,0 +1,51 @@
+2018.04.05 18:15:17 INFO  ce[][o.s.p.ProcessEntryPoint] Starting ce
+2018.04.05 18:15:17 INFO  ce[][o.s.ce.app.CeServer] Compute Engine starting up...
+2018.04.05 18:15:23 INFO  ce[][o.e.p.PluginsService] no modules loaded
+2018.04.05 18:15:23 INFO  ce[][o.e.p.PluginsService] loaded plugin [org.elasticsearch.index.reindex.ReindexPlugin]
+2018.04.05 18:15:23 INFO  ce[][o.e.p.PluginsService] loaded plugin [org.elasticsearch.join.ParentJoinPlugin]
+2018.04.05 18:15:23 INFO  ce[][o.e.p.PluginsService] loaded plugin [org.elasticsearch.percolator.PercolatorPlugin]
+2018.04.05 18:15:23 INFO  ce[][o.e.p.PluginsService] loaded plugin [org.elasticsearch.transport.Netty4Plugin]
+2018.04.05 18:15:31 INFO  ce[][o.s.s.e.EsClientProvider] Connected to local Elasticsearch: [127.0.0.1:9001]
+2018.04.05 18:15:31 INFO  ce[][o.sonar.db.Database] Create JDBC data source for jdbc:mysql://localhost:3306/sonar?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&useConfigs=maxPerformance&useSSL=false
+2018.04.05 18:15:34 INFO  ce[][o.s.s.p.ServerFileSystemImpl] SonarQube home: /Users/max/Documents/sonarDirectory/sonarqube-6.7
+2018.04.05 18:15:34 INFO  ce[][o.s.c.c.CePluginRepository] Load plugins
+2018.04.05 18:15:38 INFO  ce[][o.s.c.q.PurgeCeActivities] Delete the Compute Engine tasks created before Sat Oct 07 18:15:38 PDT 2017
+2018.04.05 18:15:38 INFO  ce[][o.s.ce.app.CeServer] Compute Engine is operational
+2018.04.05 19:49:30 INFO  ce[AWKY29_v_66qu5eadUvx][o.s.c.t.CeWorkerImpl] Execute task | project=org.apache.tika:tika | type=REPORT | id=AWKY29_v_66qu5eadUvx
+2018.04.05 19:50:05 INFO  ce[AWKY29_v_66qu5eadUvx][o.s.c.t.CeWorkerImpl] Executed task | project=org.apache.tika:tika | type=REPORT | id=AWKY29_v_66qu5eadUvx | time=34589ms
+2018.04.05 19:50:53 INFO  ce[AWKY3SGP_66qu5eadUvy][o.s.c.t.CeWorkerImpl] Execute task | project=org.apache.tika:tika | type=REPORT | id=AWKY3SGP_66qu5eadUvy
+2018.04.05 19:51:06 INFO  ce[AWKY3SGP_66qu5eadUvy][o.s.c.t.CeWorkerImpl] Executed task | project=org.apache.tika:tika | type=REPORT | id=AWKY3SGP_66qu5eadUvy | time=12661ms
+2018.04.05 19:52:34 INFO  ce[AWKY3rIU_66qu5eadUvz][o.s.c.t.CeWorkerImpl] Execute task | project=org.apache.tika:tika | type=REPORT | id=AWKY3rIU_66qu5eadUvz
+2018.04.05 19:52:42 INFO  ce[AWKY3rIU_66qu5eadUvz][o.s.c.t.CeWorkerImpl] Executed task | project=org.apache.tika:tika | type=REPORT | id=AWKY3rIU_66qu5eadUvz | time=8209ms
+2018.04.05 19:53:42 INFO  ce[AWKY37tW_66qu5eadUv0][o.s.c.t.CeWorkerImpl] Execute task | project=org.apache.tika:tika | type=REPORT | id=AWKY37tW_66qu5eadUv0
+2018.04.05 19:53:59 INFO  ce[AWKY37tW_66qu5eadUv0][o.s.c.t.CeWorkerImpl] Executed task | project=org.apache.tika:tika | type=REPORT | id=AWKY37tW_66qu5eadUv0 | time=16248ms
+2018.04.05 19:54:51 INFO  ce[AWKY4Mi9_66qu5eadUv1][o.s.c.t.CeWorkerImpl] Execute task | project=org.apache.tika:tika | type=REPORT | id=AWKY4Mi9_66qu5eadUv1
+2018.04.05 19:55:01 INFO  ce[AWKY4Mi9_66qu5eadUv1][o.s.c.t.CeWorkerImpl] Executed task | project=org.apache.tika:tika | type=REPORT | id=AWKY4Mi9_66qu5eadUv1 | time=10008ms
+2018.04.05 19:57:29 INFO  ce[AWKY4zKs_66qu5eadUv8][o.s.c.t.CeWorkerImpl] Execute task | project=org.apache.tika:tika-reactor | type=REPORT | id=AWKY4zKs_66qu5eadUv8
+2018.04.05 19:57:31 ERROR ce[AWKY4zKs_66qu5eadUv8][o.s.c.t.CeWorkerImpl] Executed task | project=org.apache.tika:tika-reactor | type=REPORT | id=AWKY4zKs_66qu5eadUv8 | time=1791ms
+2018.04.05 20:04:42 INFO  ce[AWKY6cvM_66qu5eadUv9][o.s.c.t.CeWorkerImpl] Execute task | project=org.apache.tika:tika-reactor | type=REPORT | id=AWKY6cvM_66qu5eadUv9
+2018.04.05 20:04:45 ERROR ce[AWKY6cvM_66qu5eadUv9][o.s.c.t.CeWorkerImpl] Executed task | project=org.apache.tika:tika-reactor | type=REPORT | id=AWKY6cvM_66qu5eadUv9 | time=2819ms
+2018.04.05 20:10:10 INFO  ce[AWKY7snG_66qu5eadUv-][o.s.c.t.CeWorkerImpl] Execute task | project=org.apache.tika:tika-reactor | type=REPORT | id=AWKY7snG_66qu5eadUv-
+2018.04.05 20:10:12 ERROR ce[AWKY7snG_66qu5eadUv-][o.s.c.t.CeWorkerImpl] Executed task | project=org.apache.tika:tika-reactor | type=REPORT | id=AWKY7snG_66qu5eadUv- | time=2037ms
+2018.04.05 20:20:53 INFO  ce[AWKY-J6__66qu5eadUv_][o.s.c.t.CeWorkerImpl] Execute task | project=org.apache.tika:tika-reactor | type=REPORT | id=AWKY-J6__66qu5eadUv_
+2018.04.05 20:20:55 ERROR ce[AWKY-J6__66qu5eadUv_][o.s.c.t.CeWorkerImpl] Executed task | project=org.apache.tika:tika-reactor | type=REPORT | id=AWKY-J6__66qu5eadUv_ | time=1473ms
+2018.04.05 20:28:44 INFO  ce[AWKY_8pt_66qu5eadUwA][o.s.c.t.CeWorkerImpl] Execute task | project=org.apache.tika:tika-reactor | type=REPORT | id=AWKY_8pt_66qu5eadUwA
+2018.04.05 20:28:45 ERROR ce[AWKY_8pt_66qu5eadUwA][o.s.c.t.CeWorkerImpl] Executed task | project=org.apache.tika:tika-reactor | type=REPORT | id=AWKY_8pt_66qu5eadUwA | time=1407ms
+2018.04.05 20:40:07 INFO  ce[AWKZCjpn_66qu5eadUwB][o.s.c.t.CeWorkerImpl] Execute task | project=org.apache.tika:tika | type=REPORT | id=AWKZCjpn_66qu5eadUwB
+2018.04.05 20:40:34 INFO  ce[AWKZCjpn_66qu5eadUwB][o.s.c.t.CeWorkerImpl] Executed task | project=org.apache.tika:tika | type=REPORT | id=AWKZCjpn_66qu5eadUwB | time=27492ms
+2018.04.05 20:49:28 INFO  ce[AWKZEsPn_66qu5eadUwC][o.s.c.t.CeWorkerImpl] Execute task | project=org.apache.tika:tika | type=REPORT | id=AWKZEsPn_66qu5eadUwC
+2018.04.05 20:49:43 INFO  ce[AWKZEsPn_66qu5eadUwC][o.s.c.t.CeWorkerImpl] Executed task | project=org.apache.tika:tika | type=REPORT | id=AWKZEsPn_66qu5eadUwC | time=14846ms
+2018.04.05 21:00:30 INFO  ce[AWKZHN4-_66qu5eadUwD][o.s.c.t.CeWorkerImpl] Execute task | project=org.apache.tika:tika | type=REPORT | id=AWKZHN4-_66qu5eadUwD
+2018.04.05 21:01:12 INFO  ce[AWKZHN4-_66qu5eadUwD][o.s.c.t.CeWorkerImpl] Executed task | project=org.apache.tika:tika | type=REPORT | id=AWKZHN4-_66qu5eadUwD | time=42432ms
+2018.04.05 21:11:46 INFO  ce[AWKZJy7d_66qu5eadUwE][o.s.c.t.CeWorkerImpl] Execute task | project=org.apache.tika:tika | type=REPORT | id=AWKZJy7d_66qu5eadUwE
+2018.04.05 21:12:18 INFO  ce[AWKZJy7d_66qu5eadUwE][o.s.c.t.CeWorkerImpl] Executed task | project=org.apache.tika:tika | type=REPORT | id=AWKZJy7d_66qu5eadUwE | time=31608ms
+2018.04.05 21:30:48 INFO  ce[AWKZOJ35_66qu5eadUwF][o.s.c.t.CeWorkerImpl] Execute task | project=org.apache.tika:tika | type=REPORT | id=AWKZOJ35_66qu5eadUwF
+2018.04.05 21:31:31 INFO  ce[AWKZOJ35_66qu5eadUwF][o.s.c.t.CeWorkerImpl] Executed task | project=org.apache.tika:tika | type=REPORT | id=AWKZOJ35_66qu5eadUwF | time=42122ms
+2018.04.05 21:46:33 INFO  ce[AWKZRwPC_66qu5eadUwG][o.s.c.t.CeWorkerImpl] Execute task | project=org.apache.tika:tika | type=REPORT | id=AWKZRwPC_66qu5eadUwG
+2018.04.05 21:47:16 INFO  ce[AWKZRwPC_66qu5eadUwG][o.s.c.t.CeWorkerImpl] Executed task | project=org.apache.tika:tika | type=REPORT | id=AWKZRwPC_66qu5eadUwG | time=43581ms
+2018.04.05 21:51:05 INFO  ce[AWKZSyxR_66qu5eadUwH][o.s.c.t.CeWorkerImpl] Execute task | project=org.apache.tika:tika | type=REPORT | id=AWKZSyxR_66qu5eadUwH
+2018.04.05 21:51:49 INFO  ce[AWKZSyxR_66qu5eadUwH][o.s.c.t.CeWorkerImpl] Executed task | project=org.apache.tika:tika | type=REPORT | id=AWKZSyxR_66qu5eadUwH | time=44178ms
+2018.04.05 21:59:46 INFO  ce[AWKZUx7D_66qu5eadUwI][o.s.c.t.CeWorkerImpl] Execute task | project=org.apache.tika:tika | type=REPORT | id=AWKZUx7D_66qu5eadUwI
+2018.04.05 22:00:12 INFO  ce[AWKZUx7D_66qu5eadUwI][o.s.c.t.CeWorkerImpl] Executed task | project=org.apache.tika:tika | type=REPORT | id=AWKZUx7D_66qu5eadUwI | time=25701ms
+2018.04.05 22:14:47 INFO  ce[AWKZYOJq_66qu5eadUwJ][o.s.c.t.CeWorkerImpl] Execute task | project=org.apache.tika:tika | type=REPORT | id=AWKZYOJq_66qu5eadUwJ
+2018.04.05 22:15:04 INFO  ce[AWKZYOJq_66qu5eadUwJ][o.s.c.t.CeWorkerImpl] Executed task | project=org.apache.tika:tika | type=REPORT | id=AWKZYOJq_66qu5eadUwJ | time=16313ms

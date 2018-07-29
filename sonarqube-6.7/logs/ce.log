@@ -1,0 +1,26 @@
+2018.07.27 14:26:13 INFO  ce[][o.s.p.ProcessEntryPoint] Starting ce
+2018.07.27 14:26:13 INFO  ce[][o.s.ce.app.CeServer] Compute Engine starting up...
+2018.07.27 14:26:14 INFO  ce[][o.e.p.PluginsService] no modules loaded
+2018.07.27 14:26:14 INFO  ce[][o.e.p.PluginsService] loaded plugin [org.elasticsearch.index.reindex.ReindexPlugin]
+2018.07.27 14:26:14 INFO  ce[][o.e.p.PluginsService] loaded plugin [org.elasticsearch.join.ParentJoinPlugin]
+2018.07.27 14:26:14 INFO  ce[][o.e.p.PluginsService] loaded plugin [org.elasticsearch.percolator.PercolatorPlugin]
+2018.07.27 14:26:14 INFO  ce[][o.e.p.PluginsService] loaded plugin [org.elasticsearch.transport.Netty4Plugin]
+2018.07.27 14:26:17 INFO  ce[][o.s.s.e.EsClientProvider] Connected to local Elasticsearch: [127.0.0.1:9001]
+2018.07.27 14:26:17 INFO  ce[][o.sonar.db.Database] Create JDBC data source for jdbc:mysql://localhost:3306/sonar?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&useConfigs=maxPerformance&useSSL=false
+2018.07.27 14:26:19 INFO  ce[][o.s.s.p.ServerFileSystemImpl] SonarQube home: /Users/max/Documents/sonarDirectory/sonarqube-6.7
+2018.07.27 14:26:19 INFO  ce[][o.s.c.c.CePluginRepository] Load plugins
+2018.07.27 14:26:21 INFO  ce[][o.s.c.q.PurgeCeActivities] Delete the Compute Engine tasks created before Sun Jan 28 14:26:21 PST 2018
+2018.07.27 14:26:21 INFO  ce[][o.s.ce.app.CeServer] Compute Engine is operational
+2018.07.27 14:28:36 INFO  ce[AWTdpK-6oFcSQNHF3qD7][o.s.c.t.CeWorkerImpl] Execute task | project=org.apache.tika:tika | type=REPORT | id=AWTdpK-6oFcSQNHF3qD7
+2018.07.27 14:28:49 INFO  ce[AWTdpK-6oFcSQNHF3qD7][o.s.c.t.CeWorkerImpl] Executed task | project=org.apache.tika:tika | type=REPORT | id=AWTdpK-6oFcSQNHF3qD7 | time=13182ms
+2018.07.27 14:31:02 INFO  ce[AWTdpu2eoFcSQNHF3qEC][o.s.c.t.CeWorkerImpl] Execute task | project=org.apache.tika:tika | type=REPORT | id=AWTdpu2eoFcSQNHF3qEC
+2018.07.27 14:31:10 INFO  ce[AWTdpu2eoFcSQNHF3qEC][o.s.c.t.CeWorkerImpl] Executed task | project=org.apache.tika:tika | type=REPORT | id=AWTdpu2eoFcSQNHF3qEC | time=8539ms
+2018.07.27 14:32:42 INFO  ce[AWTdqHayoFcSQNHF3qEJ][o.s.c.t.CeWorkerImpl] Execute task | project=org.apache.tika:tika | type=REPORT | id=AWTdqHayoFcSQNHF3qEJ
+2018.07.27 14:32:48 INFO  ce[AWTdqHayoFcSQNHF3qEJ][o.s.c.t.CeWorkerImpl] Executed task | project=org.apache.tika:tika | type=REPORT | id=AWTdqHayoFcSQNHF3qEJ | time=5932ms
+2018.07.27 14:34:18 INFO  ce[AWTdqelOoFcSQNHF3qEQ][o.s.c.t.CeWorkerImpl] Execute task | project=org.apache.tika:tika | type=REPORT | id=AWTdqelOoFcSQNHF3qEQ
+2018.07.27 14:34:23 INFO  ce[AWTdqelOoFcSQNHF3qEQ][o.s.c.t.CeWorkerImpl] Executed task | project=org.apache.tika:tika | type=REPORT | id=AWTdqelOoFcSQNHF3qEQ | time=4781ms
+2018.07.27 14:36:42 INFO  ce[AWTdrBhFoFcSQNHF3qEX][o.s.c.t.CeWorkerImpl] Execute task | project=org.apache.tika:tika | type=REPORT | id=AWTdrBhFoFcSQNHF3qEX
+2018.07.27 14:36:50 INFO  ce[AWTdrBhFoFcSQNHF3qEX][o.s.c.t.CeWorkerImpl] Executed task | project=org.apache.tika:tika | type=REPORT | id=AWTdrBhFoFcSQNHF3qEX | time=8155ms
+2018.07.27 20:09:59 INFO  ce[][o.s.ce.app.CeServer] Compute Engine is stopping...
+2018.07.27 20:09:59 INFO  ce[][o.s.c.t.CeProcessingSchedulerImpl] Waiting for workers to finish in-progress tasks
+2018.07.27 20:10:00 INFO  ce[][o.s.ce.app.CeServer] Compute Engine is stopped
