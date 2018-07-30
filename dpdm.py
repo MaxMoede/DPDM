@@ -89,6 +89,9 @@ def sizeAtBeginningOfRelease(tagTuple): #calculates file sizes at the beginning 
 	newOutput = ps.communicate()[0].split('\n')
 
 	for file in newOutput:
+		if "RTF" in file:
+			print("Found rtf file. Size: {}".format(file.split()[0]))
+			print("Name: {}".format(file.split()[1]))
 		#filter for java files. This may be removed in future releases of dpdm.
 		if ".java" in file:
 			fileTuple = file.split()
@@ -686,23 +689,28 @@ def buildTable(version, sizeDict, smellsDict, churnDict,
 	#	print("smells for {}: {}".format(smellNum, fileName))
 	for fileName in allFileNames:
 		if fileName not in metricDict:
+			if "RTF" in fileName:
+				print("Found {}".format(fileName))
 			metricDict[fileName] = [fileName, version]
 	for x in range(0, len(eachFileDict)): 
 		singleMetricDictionary = eachFileDict[x]#fileDictionary in eachFileDict:
 		filesForThisMetric = []
 		for fileName, metric in singleMetricDictionary.items():
 			alreadyFound = 0
+			#if "RTF" in fileName:
+			#	print("Found {} in metric {}".format(fileName, x))
+			#	print("Value: {}".format(metric))
 			#if metric < 0:
 			#	print("negative metric for {}: {}, x value: {}".format(fileName, metric, x))
 				#print("version: {}".format(version))
 			for existingFileName, listOfMetrics in metricDict.items():
-				if alreadyFound == 0:
-					if fileName in existingFileName:
-						if fileName not in usedFiles:
-							usedFiles.append(fileName)
-						filesForThisMetric.append(fileName)
-						metricDict[existingFileName].append(metric)
-						alreadyFound = 1
+				#if alreadyFound == 0:
+				if ".java" in fileName and fileName in existingFileName:
+					if fileName not in usedFiles:
+						usedFiles.append(fileName)
+					filesForThisMetric.append(fileName)
+					metricDict[existingFileName].append(metric)
+						#alreadyFound = 1
 		for eachIndFileName in usedFiles:
 			if eachIndFileName not in filesForThisMetric:
 				#print("added 0 for {}".format(eachIndFileName))
@@ -715,15 +723,15 @@ def buildTable(version, sizeDict, smellsDict, churnDict,
 			for eachThingy in splitUpFileNameAndIDs:
 				combinedAgain = eachThingy[0] + "\t" + eachThingy[1]
 				numTimesRuleBroken = ruleIDIssueDict[combinedAgain]
-				if numTimesRuleBroken != 0:
-					print("rule {} for file {} has been broken {} times".format(eachThingy[1], eachThingy[0], numTimesRuleBroken))
+				#if numTimesRuleBroken != 0:
+				#	print("rule {} for file {} has been broken {} times".format(eachThingy[1], eachThingy[0], numTimesRuleBroken))
 				metricDict[eachThingy[0]].append(numTimesRuleBroken)
 	with open("ddmTable.csv", "a") as csv_file:
 		wr = csv.writer(csv_file, quoting=csv.QUOTE_ALL)
 		for fileName, metricList in metricDict.items():
 			print("length of row: {}".format(len(metricList)))
 			if ".java" in fileName and fileName in sizeDict and fileName in smellsDict:# and len(metricList) == 310 and metricList[2] > 0:
-				print("Filename: {}".format(fileName))
+				#print("Filename: {}".format(fileName))
 				#for y in range(0, len(metricDict[fileName])):
 				#	if metricDict[fileName][y] < 0:
 				#		print("Negative value {} at y value {}".format(metricDict[fileName][y], y))
@@ -944,7 +952,7 @@ def main():
 
 	print("length of tag tuples: {}".format(len(tagTuples)))
 	createCSVHeader(ruleIDs)
-	for x in range(0, 5):#len(tagTuples)-1):
+	for x in range(4, 5):#len(tagTuples)-1):
 		p = multiprocessing.Process(target=run_for_a_version, name="Running One Version", args=(tagTuples, repo, ruleIDs, projectPath, continuedPath, githubURL, jiraURL, initialFolder, x, ))
 		p.start()
 		p.join(timeout=5000)
