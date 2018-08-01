@@ -498,6 +498,7 @@ def get_smells(tagTuple, fileSizes, tagTuples, repo, ruleIDs):
 			output, error = p.communicate()
 			if p.returncode != 0: 
 				print("sonarqube failed %d %s %s" % (p.returncode, output, error))
+				return None, None
 			else:
 				issues = get_issues()
 				if len(issues) == 0:
@@ -917,6 +918,8 @@ def run_for_a_version(tagTuples, repo, ruleIDs, projectPath, continuedPath, gith
 	fileSizes = sizeAtBeginningOfRelease(tagTuples[x])
 	sizeDict = createSizeDict(fileSizes)
 	smellsDict, ruleIDIssueDict = get_smells(tagTuples[x], fileSizes, tagTuples, repo, ruleIDs)
+	if smellsDict is None and ruleIDIssueDict is None:
+		return
 	linesTouchedDict = loc_touched(tagTuples[x], fileSizes, tagTuples, repo) #file dict, tuple of added and deleted
 	churnDict = churn(linesTouchedDict) #file dictionary, churn of files
 	maxChurnDict = churn_max(tagTuples[x], fileSizes, tagTuples, repo) #file dictionary, max of churn for a single commit
@@ -952,7 +955,7 @@ def main():
 
 	print("length of tag tuples: {}".format(len(tagTuples)))
 	createCSVHeader(ruleIDs)
-	for x in range(4, 5):#len(tagTuples)-1):
+	for x in range(0, len(tagTuples)-1):
 		p = multiprocessing.Process(target=run_for_a_version, name="Running One Version", args=(tagTuples, repo, ruleIDs, projectPath, continuedPath, githubURL, jiraURL, initialFolder, x, ))
 		p.start()
 		p.join(timeout=5000)

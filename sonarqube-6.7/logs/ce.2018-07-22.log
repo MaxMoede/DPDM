@@ -1,3 +1,0 @@
-2018.07.22 21:53:33 INFO  ce[][o.s.ce.app.CeServer] Compute Engine is stopping...
-2018.07.22 21:53:33 INFO  ce[][o.s.c.t.CeProcessingSchedulerImpl] Waiting for workers to finish in-progress tasks
-2018.07.22 21:53:35 INFO  ce[][o.s.ce.app.CeServer] Compute Engine is stopped
