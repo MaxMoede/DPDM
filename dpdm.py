@@ -14,10 +14,10 @@ import git
 import sys
 import itertools
 import shutil
+from itertools import tee, islice, chain, izip
 from datetime import date, timedelta, datetime
 from getTags import *
 from getSmells import *
-
 
 alreadyUsedIssues = {}
 
@@ -120,15 +120,24 @@ def num_revisions(tagTuple, fileSizes, tagTuples, repo): #calculates the number 
 	for file in justFiles:
 		timesTouchedDict[file] = 0
 	listOfComHashes = get_list_of_coms_between_versions(commitObj.hexsha, nextVersionHash.hexsha)
-	for shortHash in listOfComHashes:
+	for prevHash, shortHash, nextHash in previous_and_next(listOfComHashes):
 		comObj = repo.commit(shortHash)
-		filesTouched = subprocess.check_output("git diff-tree --no-commit-id --name-only -r {}".format(comObj.hexsha), shell=True).split('\n')
-		for fileTouched in filesTouched:
-			if fileTouched in timesTouchedDict:
-				timesTouchedDict[fileTouched] += 1
-			else:
-				timesTouchedDict[fileTouched] = 1
+		if nextHash is not None:
+			nextHashComObj = repo.commit(nextHash)
+			filesTouched = subprocess.check_output("git diff-tree --no-commit-id --name-only -r {} {}".format(comObj.hexsha, nextHashComObj.hexsha), shell=True).split('\n')
+			for fileTouched in filesTouched:
+				if ".java" in fileTouched:
+					if fileTouched in timesTouchedDict:
+						timesTouchedDict[fileTouched] += 1
+					else:
+						timesTouchedDict[fileTouched] = 1
 	return timesTouchedDict
+
+def previous_and_next(some_iterable):
+    prevs, items, nexts = tee(some_iterable, 3)
+    prevs = chain([None], prevs)
+    nexts = chain(islice(nexts, 1, None), [None])
+    return izip(prevs, items, nexts)
 
 def num_authors(tagTuple, fileSizes, tagTuples, repo): #calculates the number of authors for a file within a release period
 	print("getting number of authors per file...")
@@ -146,16 +155,20 @@ def num_authors(tagTuple, fileSizes, tagTuples, repo): #calculates the number of
 		authDict[file] = []
 	listOfComHashes = get_list_of_coms_between_versions(commitObj.hexsha, nextVersionHash.hexsha)
 
-	for shortHash in listOfComHashes:
+	for prevHash, shortHash, nextHash in previous_and_next(listOfComHashes):
 		comObj = repo.commit(shortHash)
-		#subprocess gives files touched for a commit
-		filesTouched = subprocess.check_output("git diff-tree --no-commit-id --name-only -r {}".format(comObj.hexsha), shell=True).split('\n')
-		for fileTouched in filesTouched:
-			if fileTouched in authDict:
-				if comObj.author.name not in authDict[fileTouched]:
-					authDict[fileTouched].append(comObj.author.name)
-			else:
-				authDict[fileTouched] = [comObj.author.name]
+		#print("commitObj: {}".format(comObj.hexsha))
+		if nextHash is not None:
+			nextHashComObj = repo.commit(nextHash)
+			#subprocess gives files touched for a commit
+			filesTouched = subprocess.check_output("git diff-tree --no-commit-id --name-only -r {} {}".format(comObj.hexsha, nextHashComObj.hexsha), shell=True).split('\n')
+			for fileTouched in filesTouched:
+				if ".java" in fileTouched:
+					if fileTouched in authDict:
+						if comObj.author.name not in authDict[fileTouched]:
+							authDict[fileTouched].append(comObj.author.name)
+					else:
+						authDict[fileTouched] = [comObj.author.name]
 	for fileName, authList in authDict.items():
 		totAuthDict[fileName] = len(authList)
 	return totAuthDict
@@ -935,10 +948,6 @@ def run_for_a_version(tagTuples, repo, ruleIDs, projectPath, continuedPath, gith
 	ageDict = get_age(tagTuples[x], tagTuples, repo) #file dictionary, age in weeks
 	totTouchedDict = total_loc_touched(linesTouchedDict) #file dict, total Lines touched
 	weightedAgeDict = weighted_age(ageDict, totTouchedDict) #file dict, weighted age
-	#for eachFileName, someRandoVal in sizeDict.items():
-	#	if someRandoVal < 0:
-	#		print("This file already has a negative value: {} ... {}".format(eachFileName, someRandoVal))
-	#sys.exit(0)
 	buildTable(tagTuples[x][0], sizeDict, smellsDict, churnDict, maxChurnDict, avgChurnDict, chgSetDict, maxChgDict, avgChgDict, locAddedDict, maxLocDict, avgLocDict, numRevDict, numAuthorsDict, ageDict, totTouchedDict, weightedAgeDict, ruleIDIssueDict, ruleIDs)
 
 
