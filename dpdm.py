@@ -624,7 +624,7 @@ def getFilesFromSizes(fileSizes):
 		justFiles.append(item[1])
 	return justFiles
 
-def get_age(tagTuple, tagTuples, repo):
+def get_age(tagTuple, tagTuples, fileSizes, repo):
 	print("calculating age...")
 	ageDict = {}
 	commitObj = tagTuple[1]
@@ -646,16 +646,22 @@ def get_age(tagTuple, tagTuples, repo):
 		if len(fileDataParts) > 3:
 			fileName = fileDataParts[3]
 			listOfFiles.append(fileName)
-	for fileName in listOfFiles:
+	justFiles = getFilesFromSizes(fileSizes)
+	#for file in justFiles:
+	#	ageDict[file] = 0
+	for fileName in justFiles:#justFiles:
 		if ".java" in fileName:
+			print("fileName: {}".format(fileName))
 			try:
 				ageData = subprocess.check_output("git log --diff-filter=A --follow --format=%aI -- {} | tail -1".format(fileName), shell=True)
 				ageData = ageData[0:10]
 				fileCreationDate = datetime.strptime(ageData, '%Y-%m-%d')
 				ageDifference = preComDate - fileCreationDate
 				ageDifInWeeks = ageDifference.days / 7
+				print("age: {}".format(ageDifInWeeks))
 				ageDict[fileName] = abs(ageDifInWeeks)
-			except:
+			except Exception as e:
+				print(e)
 				ageDict[fileName] = 0
 				continue
 	return ageDict
@@ -945,7 +951,7 @@ def run_for_a_version(tagTuples, repo, ruleIDs, projectPath, continuedPath, gith
 	avgLocDict = loc_avg(tagTuples[x], fileSizes, tagTuples, repo) #file dictionary, tuple of added/deleted
 	numRevDict = num_revisions(tagTuples[x], fileSizes, tagTuples, repo) #file dictionary, num revisions
 	numAuthorsDict = num_authors(tagTuples[x], fileSizes, tagTuples, repo)  #file dictionary, num authors per file
-	ageDict = get_age(tagTuples[x], tagTuples, repo) #file dictionary, age in weeks
+	ageDict = get_age(tagTuples[x], tagTuples, fileSizes, repo) #file dictionary, age in weeks
 	totTouchedDict = total_loc_touched(linesTouchedDict) #file dict, total Lines touched
 	weightedAgeDict = weighted_age(ageDict, totTouchedDict) #file dict, weighted age
 	buildTable(tagTuples[x][0], sizeDict, smellsDict, churnDict, maxChurnDict, avgChurnDict, chgSetDict, maxChgDict, avgChgDict, locAddedDict, maxLocDict, avgLocDict, numRevDict, numAuthorsDict, ageDict, totTouchedDict, weightedAgeDict, ruleIDIssueDict, ruleIDs)
@@ -964,7 +970,7 @@ def main():
 
 	print("length of tag tuples: {}".format(len(tagTuples)))
 	createCSVHeader(ruleIDs)
-	for x in range(0, len(tagTuples)-1):
+	for x in range(16, 17):#len(tagTuples)-1):
 		p = multiprocessing.Process(target=run_for_a_version, name="Running One Version", args=(tagTuples, repo, ruleIDs, projectPath, continuedPath, githubURL, jiraURL, initialFolder, x, ))
 		p.start()
 		p.join(timeout=5000)
