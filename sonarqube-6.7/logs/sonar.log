@@ -1257,3 +1257,13 @@ Wrapper (Version 3.2.3) http://wrapper.tanukisoftware.org
 2018.07.31 13:21:59 INFO  app[][o.s.a.p.ProcessLauncherImpl] Launch process[[key='ce', ipcIndex=3, logFilenamePrefix=ce]] from [/Users/max/Documents/sonarDirectory/officialGithub/sonarqube-6.7]: /Library/Java/JavaVirtualMachines/jdk1.8.0_77.jdk/Contents/Home/jre/bin/java -Djava.awt.headless=true -Dfile.encoding=UTF-8 -Djava.io.tmpdir=/Users/max/Documents/sonarDirectory/officialGithub/sonarqube-6.7/temp -Xmx512m -Xms128m -XX:+HeapDumpOnOutOfMemoryError -cp ./lib/common/*:./lib/server/*:./lib/ce/*:/Users/max/Documents/sonarDirectory/officialGithub/sonarqube-6.7/lib/jdbc/mysql/mysql-connector-java-5.1.42.jar org.sonar.ce.app.CeServer /Users/max/Documents/sonarDirectory/officialGithub/sonarqube-6.7/temp/sq-process3250903190861297372properties
 2018.07.31 13:22:11 INFO  app[][o.s.a.SchedulerImpl] Process[ce] is up
 2018.07.31 13:22:11 INFO  app[][o.s.a.SchedulerImpl] SonarQube is up
+2018.08.08 23:15:18 WARN  app[][o.s.a.p.AbstractProcessMonitor] Process exited with exit value [es]: 129
+2018.08.08 23:15:18 INFO  app[][o.s.a.SchedulerImpl] Process [es] is stopped
+2018.08.08 23:15:19 WARN  app[][o.s.a.p.AbstractProcessMonitor] Process exited with exit value [ce]: 129
+2018.08.08 23:15:19 WARN  app[][o.s.a.p.AbstractProcessMonitor] Process exited with exit value [ce]: 129
+2018.08.08 23:15:19 INFO  app[][o.s.a.SchedulerImpl] Process [ce] is stopped
+2018.08.08 23:15:20 WARN  app[][o.s.a.p.AbstractProcessMonitor] Process exited with exit value [web]: 129
+2018.08.08 23:15:20 WARN  app[][o.s.a.p.AbstractProcessMonitor] Process exited with exit value [web]: 129
+2018.08.08 23:15:20 INFO  app[][o.s.a.SchedulerImpl] Process [web] is stopped
+2018.08.08 23:15:20 INFO  app[][o.s.a.SchedulerImpl] SonarQube is stopped
+<-- Wrapper Stopped

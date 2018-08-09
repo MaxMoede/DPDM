@@ -1,0 +1,19 @@
+2018.08.02 13:36:49 INFO  ce[AWT8W22Pi_1oMLckz3Or][o.s.c.t.CeWorkerImpl] Execute task | project=org.apache.tika:tika | type=REPORT | id=AWT8W22Pi_1oMLckz3Or
+2018.08.02 13:36:59 INFO  ce[AWT8W22Pi_1oMLckz3Or][o.s.c.t.CeWorkerImpl] Executed task | project=org.apache.tika:tika | type=REPORT | id=AWT8W22Pi_1oMLckz3Or | time=10086ms
+2018.08.02 13:41:40 INFO  ce[AWT8X-Qhi_1oMLckz3Oy][o.s.c.t.CeWorkerImpl] Execute task | project=org.apache.tika:tika | type=REPORT | id=AWT8X-Qhi_1oMLckz3Oy
+2018.08.02 13:41:43 INFO  ce[AWT8X-Qhi_1oMLckz3Oy][o.s.c.t.CeWorkerImpl] Executed task | project=org.apache.tika:tika | type=REPORT | id=AWT8X-Qhi_1oMLckz3Oy | time=3295ms
+2018.08.02 13:49:39 INFO  ce[AWT8Zyy8i_1oMLckz3O5][o.s.c.t.CeWorkerImpl] Execute task | project=org.apache.commons:commons-math | type=REPORT | id=AWT8Zyy8i_1oMLckz3O5
+2018.08.02 13:49:56 INFO  ce[AWT8Zyy8i_1oMLckz3O5][o.s.c.t.CeWorkerImpl] Executed task | project=org.apache.commons:commons-math | type=REPORT | id=AWT8Zyy8i_1oMLckz3O5 | time=16883ms
+2018.08.02 13:58:11 INFO  ce[AWT8bvQvi_1oMLckz3PA][o.s.c.t.CeWorkerImpl] Execute task | project=org.apache.commons:commons-math | type=REPORT | id=AWT8bvQvi_1oMLckz3PA
+2018.08.02 13:58:30 INFO  ce[AWT8bvQvi_1oMLckz3PA][o.s.c.t.CeWorkerImpl] Executed task | project=org.apache.commons:commons-math | type=REPORT | id=AWT8bvQvi_1oMLckz3PA | time=19675ms
+2018.08.02 14:34:54 INFO  ce[AWT8kKB3i_1oMLckz3PH][o.s.c.t.CeWorkerImpl] Execute task | project=org.apache.tika:tika | type=REPORT | id=AWT8kKB3i_1oMLckz3PH
+2018.08.02 14:34:59 INFO  ce[AWT8kKB3i_1oMLckz3PH][o.s.c.t.CeWorkerImpl] Executed task | project=org.apache.tika:tika | type=REPORT | id=AWT8kKB3i_1oMLckz3PH | time=4325ms
+2018.08.02 14:37:37 INFO  ce[AWT8kxqXi_1oMLckz3PO][o.s.c.t.CeWorkerImpl] Execute task | project=org.apache.tika:tika | type=REPORT | id=AWT8kxqXi_1oMLckz3PO
+2018.08.02 14:37:41 INFO  ce[AWT8kxqXi_1oMLckz3PO][o.s.c.t.CeWorkerImpl] Executed task | project=org.apache.tika:tika | type=REPORT | id=AWT8kxqXi_1oMLckz3PO | time=4470ms
+2018.08.02 14:39:16 INFO  ce[AWT8lJv1i_1oMLckz3PV][o.s.c.t.CeWorkerImpl] Execute task | project=org.apache.tika:tika | type=REPORT | id=AWT8lJv1i_1oMLckz3PV
+2018.08.02 14:39:19 INFO  ce[AWT8lJv1i_1oMLckz3PV][o.s.c.t.CeWorkerImpl] Executed task | project=org.apache.tika:tika | type=REPORT | id=AWT8lJv1i_1oMLckz3PV | time=2939ms
+2018.08.02 14:40:49 INFO  ce[AWT8lgsAi_1oMLckz3Pc][o.s.c.t.CeWorkerImpl] Execute task | project=org.apache.tika:tika | type=REPORT | id=AWT8lgsAi_1oMLckz3Pc
+2018.08.02 14:40:53 INFO  ce[AWT8lgsAi_1oMLckz3Pc][o.s.c.t.CeWorkerImpl] Executed task | project=org.apache.tika:tika | type=REPORT | id=AWT8lgsAi_1oMLckz3Pc | time=4256ms
+2018.08.02 15:07:55 INFO  ce[][o.s.ce.app.CeServer] Compute Engine is stopping...
+2018.08.02 15:07:55 INFO  ce[][o.s.c.t.CeProcessingSchedulerImpl] Waiting for workers to finish in-progress tasks
+2018.08.02 15:07:56 INFO  ce[][o.s.ce.app.CeServer] Compute Engine is stopped

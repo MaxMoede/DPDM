@@ -506,7 +506,7 @@ def get_smells(tagTuple, fileSizes, tagTuples, repo, ruleIDs):
 		return issueDict, ruleIDIssueDict
 	else:
 		try:
-			p = subprocess.Popen(["mvn", "clean", "install", "-DskipTests=true", "-Dmaven.test.failure.ignore=true", "-U", "--fail-at-end", "sonar:sonar", "-Dsonar.host.url=http://localhost:9000"], stdout=PIPE, stderr=PIPE)
+			p = subprocess.Popen(["mvn", "clean", "install", "-Drat.skip=true", "-DskipTests=true", "-Dmaven.test.failure.ignore=true", "-U", "--fail-at-end", "sonar:sonar", "-Dsonar.host.url=http://localhost:9000"], stdout=PIPE, stderr=PIPE)
 			#p = subprocess.Popen(["ant", "sonar"], stdout=PIPE, stderr=PIPE)
 			output, error = p.communicate()
 			if p.returncode != 0: 

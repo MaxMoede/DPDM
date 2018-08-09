@@ -1,0 +1,21 @@
+2018.07.31 13:21:20 INFO  es[][o.e.n.Node] initializing ...
+2018.07.31 13:21:20 INFO  es[][o.e.e.NodeEnvironment] using [1] data paths, mounts [[/ (/dev/disk1s1)]], net usable_space [75gb], net total_space [233.5gb], spins? [unknown], types [apfs]
+2018.07.31 13:21:20 INFO  es[][o.e.e.NodeEnvironment] heap size [494.9mb], compressed ordinary object pointers [true]
+2018.07.31 13:21:20 INFO  es[][o.e.n.Node] node name [sonarqube], node ID [2sdOxSDZSASrWBkYmYWgCg]
+2018.07.31 13:21:20 INFO  es[][o.e.n.Node] version[5.6.3], pid[54500], build[1a2f265/2017-10-06T20:33:39.012Z], OS[Mac OS X/10.13.1/x86_64], JVM[Oracle Corporation/Java HotSpot(TM) 64-Bit Server VM/1.8.0_77/25.77-b03]
+2018.07.31 13:21:20 INFO  es[][o.e.n.Node] JVM arguments [-XX:+UseConcMarkSweepGC, -XX:CMSInitiatingOccupancyFraction=75, -XX:+UseCMSInitiatingOccupancyOnly, -XX:+AlwaysPreTouch, -Xss1m, -Djava.awt.headless=true, -Dfile.encoding=UTF-8, -Djna.nosys=true, -Djdk.io.permissionsUseCanonicalPath=true, -Dio.netty.noUnsafe=true, -Dio.netty.noKeySetOptimization=true, -Dio.netty.recycler.maxCapacityPerThread=0, -Dlog4j.shutdownHookEnabled=false, -Dlog4j2.disable.jmx=true, -Dlog4j.skipJansi=true, -Xms512m, -Xmx512m, -XX:+HeapDumpOnOutOfMemoryError, -Des.path.home=/Users/max/Documents/sonarDirectory/officialGithub/sonarqube-6.7/elasticsearch]
+2018.07.31 13:21:21 INFO  es[][o.e.p.PluginsService] loaded module [aggs-matrix-stats]
+2018.07.31 13:21:21 INFO  es[][o.e.p.PluginsService] loaded module [ingest-common]
+2018.07.31 13:21:21 INFO  es[][o.e.p.PluginsService] loaded module [parent-join]
+2018.07.31 13:21:21 INFO  es[][o.e.p.PluginsService] loaded module [percolator]
+2018.07.31 13:21:21 INFO  es[][o.e.p.PluginsService] loaded module [reindex]
+2018.07.31 13:21:21 INFO  es[][o.e.p.PluginsService] loaded module [transport-netty4]
+2018.07.31 13:21:21 INFO  es[][o.e.p.PluginsService] no plugins loaded
+2018.07.31 13:21:24 INFO  es[][o.e.d.DiscoveryModule] using discovery type [zen]
+2018.07.31 13:21:25 INFO  es[][o.e.n.Node] initialized
+2018.07.31 13:21:25 INFO  es[][o.e.n.Node] starting ...
+2018.07.31 13:21:26 INFO  es[][o.e.t.TransportService] publish_address {127.0.0.1:9001}, bound_addresses {127.0.0.1:9001}
+2018.07.31 13:21:29 INFO  es[][o.e.c.s.ClusterService] new_master {sonarqube}{2sdOxSDZSASrWBkYmYWgCg}{J6zMUIi7TtqsgJRjgPlv4Q}{127.0.0.1}{127.0.0.1:9001}{rack_id=sonarqube}, reason: zen-disco-elected-as-master ([0] nodes joined)
+2018.07.31 13:21:29 INFO  es[][o.e.n.Node] started
+2018.07.31 13:21:29 INFO  es[][o.e.g.GatewayService] recovered [8] indices into cluster_state
+2018.07.31 13:21:32 INFO  es[][o.e.c.r.a.AllocationService] Cluster health status changed from [RED] to [GREEN] (reason: [shards started [[metadatas][0]] ...]).
