@@ -1267,3 +1267,65 @@ Wrapper (Version 3.2.3) http://wrapper.tanukisoftware.org
 2018.08.08 23:15:20 INFO  app[][o.s.a.SchedulerImpl] Process [web] is stopped
 2018.08.08 23:15:20 INFO  app[][o.s.a.SchedulerImpl] SonarQube is stopped
 <-- Wrapper Stopped
+--> Wrapper Started as Console
+Launching a JVM...
+Wrapper (Version 3.2.3) http://wrapper.tanukisoftware.org
+  Copyright 1999-2006 Tanuki Software, Inc.  All Rights Reserved.
+
+2018.08.10 20:08:37 INFO  app[][o.s.a.AppFileSystem] Cleaning or creating temp directory /Users/max/Documents/sonarDirectory/officialGithub/sonarqube-6.7/temp
+2018.08.10 20:08:37 INFO  app[][o.s.a.es.EsSettings] Elasticsearch listening on /127.0.0.1:9001
+2018.08.10 20:08:37 INFO  app[][o.s.a.p.ProcessLauncherImpl] Launch process[[key='es', ipcIndex=1, logFilenamePrefix=es]] from [/Users/max/Documents/sonarDirectory/officialGithub/sonarqube-6.7/elasticsearch]: /Users/max/Documents/sonarDirectory/officialGithub/sonarqube-6.7/elasticsearch/bin/elasticsearch -Epath.conf=/Users/max/Documents/sonarDirectory/officialGithub/sonarqube-6.7/temp/conf/es
+2018.08.10 20:08:37 INFO  app[][o.s.a.SchedulerImpl] Waiting for Elasticsearch to be up and running
+2018.08.10 20:08:38 INFO  app[][o.e.p.PluginsService] no modules loaded
+2018.08.10 20:08:38 INFO  app[][o.e.p.PluginsService] loaded plugin [org.elasticsearch.transport.Netty4Plugin]
+2018.08.10 20:08:52 INFO  app[][o.s.a.SchedulerImpl] Process[es] is up
+2018.08.10 20:08:52 INFO  app[][o.s.a.p.ProcessLauncherImpl] Launch process[[key='web', ipcIndex=2, logFilenamePrefix=web]] from [/Users/max/Documents/sonarDirectory/officialGithub/sonarqube-6.7]: /Library/Java/JavaVirtualMachines/jdk1.8.0_77.jdk/Contents/Home/jre/bin/java -Djava.awt.headless=true -Dfile.encoding=UTF-8 -Djava.io.tmpdir=/Users/max/Documents/sonarDirectory/officialGithub/sonarqube-6.7/temp -Xmx512m -Xms128m -XX:+HeapDumpOnOutOfMemoryError -cp ./lib/common/*:./lib/server/*:/Users/max/Documents/sonarDirectory/officialGithub/sonarqube-6.7/lib/jdbc/mysql/mysql-connector-java-5.1.42.jar org.sonar.server.app.WebServer /Users/max/Documents/sonarDirectory/officialGithub/sonarqube-6.7/temp/sq-process8406150287846408199properties
+2018.08.10 20:09:15 INFO  app[][o.s.a.SchedulerImpl] Process[web] is up
+2018.08.10 20:09:15 INFO  app[][o.s.a.p.ProcessLauncherImpl] Launch process[[key='ce', ipcIndex=3, logFilenamePrefix=ce]] from [/Users/max/Documents/sonarDirectory/officialGithub/sonarqube-6.7]: /Library/Java/JavaVirtualMachines/jdk1.8.0_77.jdk/Contents/Home/jre/bin/java -Djava.awt.headless=true -Dfile.encoding=UTF-8 -Djava.io.tmpdir=/Users/max/Documents/sonarDirectory/officialGithub/sonarqube-6.7/temp -Xmx512m -Xms128m -XX:+HeapDumpOnOutOfMemoryError -cp ./lib/common/*:./lib/server/*:./lib/ce/*:/Users/max/Documents/sonarDirectory/officialGithub/sonarqube-6.7/lib/jdbc/mysql/mysql-connector-java-5.1.42.jar org.sonar.ce.app.CeServer /Users/max/Documents/sonarDirectory/officialGithub/sonarqube-6.7/temp/sq-process8269615918154298130properties
+2018.08.10 20:09:23 INFO  app[][o.s.a.SchedulerImpl] Process[ce] is up
+2018.08.10 20:09:23 INFO  app[][o.s.a.SchedulerImpl] SonarQube is up
+--> Wrapper Started as Console
+Launching a JVM...
+Wrapper (Version 3.2.3) http://wrapper.tanukisoftware.org
+  Copyright 1999-2006 Tanuki Software, Inc.  All Rights Reserved.
+
+2018.08.12 14:34:47 INFO  app[][o.s.a.AppFileSystem] Cleaning or creating temp directory /Users/max/Documents/sonarDirectory/officialGithub/sonarqube-6.7/temp
+2018.08.12 14:34:47 INFO  app[][o.s.a.es.EsSettings] Elasticsearch listening on /127.0.0.1:9001
+2018.08.12 14:34:47 INFO  app[][o.s.a.p.ProcessLauncherImpl] Launch process[[key='es', ipcIndex=1, logFilenamePrefix=es]] from [/Users/max/Documents/sonarDirectory/officialGithub/sonarqube-6.7/elasticsearch]: /Users/max/Documents/sonarDirectory/officialGithub/sonarqube-6.7/elasticsearch/bin/elasticsearch -Epath.conf=/Users/max/Documents/sonarDirectory/officialGithub/sonarqube-6.7/temp/conf/es
+2018.08.12 14:34:47 INFO  app[][o.s.a.SchedulerImpl] Waiting for Elasticsearch to be up and running
+2018.08.12 14:34:48 INFO  app[][o.e.p.PluginsService] no modules loaded
+2018.08.12 14:34:48 INFO  app[][o.e.p.PluginsService] loaded plugin [org.elasticsearch.transport.Netty4Plugin]
+TERM trapped.  Shutting down.
+TERM trapped.  Forcing immediate shutdown.
+JVM process was still running after receiving a SIGCHLD signal.
+JVM did not exit on request, terminated
+JVM exited on its own while waiting to kill the application.
+JVM exited in response to signal SIGKILL (9).
+<-- Wrapper Stopped
+--> Wrapper Started as Console
+Launching a JVM...
+Wrapper (Version 3.2.3) http://wrapper.tanukisoftware.org
+  Copyright 1999-2006 Tanuki Software, Inc.  All Rights Reserved.
+
+2018.08.12 14:49:12 INFO  app[][o.s.a.AppFileSystem] Cleaning or creating temp directory /Users/max/Documents/sonarDirectory/officialGithub/sonarqube-6.7/temp
+2018.08.12 14:49:12 INFO  app[][o.s.a.es.EsSettings] Elasticsearch listening on /127.0.0.1:9001
+2018.08.12 14:49:12 INFO  app[][o.s.a.p.ProcessLauncherImpl] Launch process[[key='es', ipcIndex=1, logFilenamePrefix=es]] from [/Users/max/Documents/sonarDirectory/officialGithub/sonarqube-6.7/elasticsearch]: /Users/max/Documents/sonarDirectory/officialGithub/sonarqube-6.7/elasticsearch/bin/elasticsearch -Epath.conf=/Users/max/Documents/sonarDirectory/officialGithub/sonarqube-6.7/temp/conf/es
+2018.08.12 14:49:12 INFO  app[][o.s.a.SchedulerImpl] Waiting for Elasticsearch to be up and running
+2018.08.12 14:49:14 INFO  app[][o.e.p.PluginsService] no modules loaded
+2018.08.12 14:49:14 INFO  app[][o.e.p.PluginsService] loaded plugin [org.elasticsearch.transport.Netty4Plugin]
+2018.08.12 14:50:53 ERROR app[][o.s.a.p.EsProcessMonitor] Failed to check status
+java.lang.IllegalStateException: ClusterService was close during health call
+	at org.elasticsearch.action.admin.cluster.health.TransportClusterHealthAction$3.onClusterServiceClose(TransportClusterHealthAction.java:180)
+	at org.elasticsearch.cluster.ClusterStateObserver$ContextPreservingListener.onClusterServiceClose(ClusterStateObserver.java:304)
+	at org.elasticsearch.cluster.ClusterStateObserver$ObserverClusterStateListener.onClose(ClusterStateObserver.java:224)
+	at org.elasticsearch.cluster.service.ClusterService.doStop(ClusterService.java:230)
+	at org.elasticsearch.common.component.AbstractLifecycleComponent.stop(AbstractLifecycleComponent.java:88)
+	at org.elasticsearch.node.Node.stop(Node.java:787)
+	at org.elasticsearch.node.Node.close(Node.java:809)
+	at org.apache.lucene.util.IOUtils.close(IOUtils.java:89)
+	at org.apache.lucene.util.IOUtils.close(IOUtils.java:76)
+	at org.elasticsearch.bootstrap.Bootstrap$4.run(Bootstrap.java:209)
+2018.08.12 14:50:53 WARN  app[][o.s.a.p.AbstractProcessMonitor] Process exited with exit value [es]: 129
+2018.08.12 14:50:53 INFO  app[][o.s.a.SchedulerImpl] Process [es] is stopped
+2018.08.12 14:50:53 INFO  app[][o.s.a.SchedulerImpl] SonarQube is stopped
+<-- Wrapper Stopped

@@ -509,10 +509,12 @@ def get_smells(tagTuple, fileSizes, tagTuples, repo, ruleIDs):
 			p = subprocess.Popen(["mvn", "clean", "install", "-Drat.skip=true", "-DskipTests=true", "-Dmaven.test.failure.ignore=true", "-U", "--fail-at-end", "sonar:sonar", "-Dsonar.host.url=http://localhost:9000"], stdout=PIPE, stderr=PIPE)
 			#p = subprocess.Popen(["ant", "sonar"], stdout=PIPE, stderr=PIPE)
 			output, error = p.communicate()
-			if p.returncode != 0: 
+			if p.returncode != 0 and "Analysis report generated" not in output: 
 				print("sonarqube failed %d %s %s" % (p.returncode, output, error))
 				return None, None
 			else:
+				if "Analysis report generated" in output:
+					print("Found an analysis not previously used")
 				issues = get_issues()
 				if len(issues) == 0:
 					print("getting smells failed.")
@@ -967,7 +969,6 @@ def main():
 
 	tagTuples = getReleases(projectPath, repo)
 	ruleIDs = get_rule_IDs()
-
 	print("length of tag tuples: {}".format(len(tagTuples)))
 	createCSVHeader(ruleIDs)
 	for x in range(0, len(tagTuples)-1):
