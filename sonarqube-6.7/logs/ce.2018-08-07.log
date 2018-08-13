@@ -1,2 +1,0 @@
-2018.08.07 00:04:48 INFO  ce[AWUTM8efdy7CLZdGcNBr][o.s.c.t.CeWorkerImpl] Execute task | project=org.apache.accumulo:accumulo-project | type=REPORT | id=AWUTM8efdy7CLZdGcNBr
-2018.08.07 00:05:58 INFO  ce[AWUTM8efdy7CLZdGcNBr][o.s.c.t.CeWorkerImpl] Executed task | project=org.apache.accumulo:accumulo-project | type=REPORT | id=AWUTM8efdy7CLZdGcNBr | time=70112ms

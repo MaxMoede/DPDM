@@ -14,6 +14,7 @@ import git
 import sys
 import itertools
 import shutil
+from os.path import isfile, join
 from itertools import tee, islice, chain, izip
 from datetime import date, timedelta, datetime
 from getTags import *
@@ -80,7 +81,10 @@ def sizeAtBeginningOfRelease(tagTuple): #calculates file sizes at the beginning 
 			unaccountedFileNames.append(eachFileName)
 	#Have to get last commit of previous release,
 	#Which is the previous commit of the corresponding tag
-	previousCommit = subprocess.check_output("git show {}^1".format(commitObj.hexsha), shell=True)
+	try:
+		previousCommit = subprocess.check_output("git show {}^1".format(commitObj.hexsha), shell=True)
+	except:
+		previousCommit = subprocess.check_output("git show {}".format(commitObj.hexsha), shell=True)
 	previousComHash = previousCommit.split()[1]
 	subprocess.check_output("git checkout -f {}".format(previousComHash), shell=True)
 	#gets a tree of all files with corresponding line numbers
@@ -477,7 +481,26 @@ def find_existing_file_name(listOfFileNames, partialFileName):
 		return None
 	return None
 
-def get_smells(tagTuple, fileSizes, tagTuples, repo, ruleIDs):
+def run_ant_project_smells():
+	filesInDirectory = [f for f in os.listdir(".") if isfile(join(".", f))]
+	if "build.xml" in filesInDirectory:
+		print("Found the build xml file!")
+	sys.exit(0)
+
+def run_maven_project_smells():
+	p = subprocess.Popen(["mvn", "clean", "install", "-Drat.skip=true", "-DskipTests=true", "-Dmaven.test.failure.ignore=true", "-U", "--fail-at-end", "sonar:sonar", "-Dsonar.host.url=http://localhost:9000"], stdout=PIPE, stderr=PIPE)
+	#p = subprocess.Popen(["ant", "sonar"], stdout=PIPE, stderr=PIPE)
+	output, error = p.communicate()
+	if p.returncode != 0 and "Analysis report generated" not in output: 
+		print("sonarqube failed %d %s %s" % (p.returncode, output, error))
+		return "no"
+	else:
+		if "Analysis report generated" in output:
+			print("Found an analysis not previously used")
+		return "yes"
+
+
+def get_smells(tagTuple, fileSizes, tagTuples, repo, ruleIDs, antOrMaven):
 	#Jacky: This will be the function that you will need to change to support ant builds.
 	#I apologize in advance for how bulky this function is.
 	#Sonarqube can be ran on a maven project by building the project with maven and then running a sonar command.
@@ -506,53 +529,59 @@ def get_smells(tagTuple, fileSizes, tagTuples, repo, ruleIDs):
 		return issueDict, ruleIDIssueDict
 	else:
 		try:
-			p = subprocess.Popen(["mvn", "clean", "install", "-Drat.skip=true", "-DskipTests=true", "-Dmaven.test.failure.ignore=true", "-U", "--fail-at-end", "sonar:sonar", "-Dsonar.host.url=http://localhost:9000"], stdout=PIPE, stderr=PIPE)
-			#p = subprocess.Popen(["ant", "sonar"], stdout=PIPE, stderr=PIPE)
-			output, error = p.communicate()
-			if p.returncode != 0 and "Analysis report generated" not in output: 
-				print("sonarqube failed %d %s %s" % (p.returncode, output, error))
+			didSmellsRun = "no"
+			if antOrMaven == "MAVEN":
+				print("Maven project...")
+				didSmellsRun = run_maven_project_smells()
+				#p = subprocess.Popen(["mvn", "clean", "install", "-Drat.skip=true", "-DskipTests=true", "-Dmaven.test.failure.ignore=true", "-U", "--fail-at-end", "sonar:sonar", "-Dsonar.host.url=http://localhost:9000"], stdout=PIPE, stderr=PIPE)
+				##p = subprocess.Popen(["ant", "sonar"], stdout=PIPE, stderr=PIPE)
+				#output, error = p.communicate()
+				#if p.returncode != 0 and "Analysis report generated" not in output: 
+				#	print("sonarqube failed %d %s %s" % (p.returncode, output, error))
+				#	return None, None
+			elif antOrMaven == "ANT":
+				print("Ant project...")
+				didSmellsRun = run_ant_project_smells()
+			if didSmellsRun == "no":
 				return None, None
-			else:
-				if "Analysis report generated" in output:
-					print("Found an analysis not previously used")
-				issues = get_issues()
-				if len(issues) == 0:
-					print("getting smells failed.")
-				for eachIssue in issues:
-					if eachIssue is not None:
-						if eachIssue[2].decode("utf-8") not in alreadyUsedIssues:
-							fileName = eachIssue[0].decode("utf-8")
-							#COME BACK HERE
-							newFileName = find_existing_file_name(justFiles, fileName)
-							if newFileName is not None:
-								fileName = newFileName
-							if "HttpHeaders" in fileName:
-								print("Found httpheaders: {}".format(fileName))
-							foundAMatch = 0
-							correspondingRuleID = str(eachIssue[1])
-							for eachFileName, numIssues in issueDict.items():
-								fileAndRuleID = eachFileName + "\t" + correspondingRuleID
-								if fileName in eachFileName and foundAMatch == 0:
-									issueDict[eachFileName] += 1
-									if fileAndRuleID in ruleIDIssueDict:
-										ruleIDIssueDict[fileAndRuleID] += 1
-									else:
-										ruleIDIssueDict[fileAndRuleID] = 1
-									foundAMatch = 1
-							if foundAMatch == 0:
-								missingFileAndRuleID = fileName + "\t" + correspondingRuleID
-								issueDict[fileName] = 1
-								ruleIDIssueDict[missingFileAndRuleID] = 1
+			issues = get_issues()
+			if len(issues) == 0:
+				print("getting smells failed.")
+			for eachIssue in issues:
+				if eachIssue is not None:
+					if eachIssue[2].decode("utf-8") not in alreadyUsedIssues:
+						fileName = eachIssue[0].decode("utf-8")
+						#COME BACK HERE
+						newFileName = find_existing_file_name(justFiles, fileName)
+						if newFileName is not None:
+							fileName = newFileName
+						if "HttpHeaders" in fileName:
+							print("Found httpheaders: {}".format(fileName))
+						foundAMatch = 0
+						correspondingRuleID = str(eachIssue[1])
+						for eachFileName, numIssues in issueDict.items():
+							fileAndRuleID = eachFileName + "\t" + correspondingRuleID
+							if fileName in eachFileName and foundAMatch == 0:
+								issueDict[eachFileName] += 1
+								if fileAndRuleID in ruleIDIssueDict:
+									ruleIDIssueDict[fileAndRuleID] += 1
+								else:
+									ruleIDIssueDict[fileAndRuleID] = 1
+								foundAMatch = 1
+						if foundAMatch == 0:
+							missingFileAndRuleID = fileName + "\t" + correspondingRuleID
+							issueDict[fileName] = 1
+							ruleIDIssueDict[missingFileAndRuleID] = 1
 
-							alreadyUsedIssues[eachIssue[2].decode("utf-8")] = "Used"
-				stringRuleIDs = [str(i) for i in ruleIDs]
-				for eachFileName in issueDict.keys():
-					SpecificFileRuleIDList = [x for x in ruleIDIssueDict.keys() if eachFileName in x]
-					combinedSpecificList = '\t'.join(SpecificFileRuleIDList)
-					missingRuleIDs = [j for j in stringRuleIDs if j not in combinedSpecificList]
-					for eachMissingRuleID in missingRuleIDs:
-						newCombinedFileAndIssue = eachFileName + "\t" + eachMissingRuleID
-						ruleIDIssueDict[newCombinedFileAndIssue] = 0
+						alreadyUsedIssues[eachIssue[2].decode("utf-8")] = "Used"
+			stringRuleIDs = [str(i) for i in ruleIDs]
+			for eachFileName in issueDict.keys():
+				SpecificFileRuleIDList = [x for x in ruleIDIssueDict.keys() if eachFileName in x]
+				combinedSpecificList = '\t'.join(SpecificFileRuleIDList)
+				missingRuleIDs = [j for j in stringRuleIDs if j not in combinedSpecificList]
+				for eachMissingRuleID in missingRuleIDs:
+					newCombinedFileAndIssue = eachFileName + "\t" + eachMissingRuleID
+					ruleIDIssueDict[newCombinedFileAndIssue] = 0
 
 		except subprocess.CalledProcessError as someError:
 			print(someError)
@@ -934,11 +963,11 @@ def createRepo(githubURL):
 			print("not recognized as a directory... {}".format(str(x)))
 	return continuedPath
 
-def run_for_a_version(tagTuples, repo, ruleIDs, projectPath, continuedPath, githubURL, jiraURL, initialFolder, x):
+def run_for_a_version(tagTuples, repo, ruleIDs, projectPath, continuedPath, githubURL, jiraURL, initialFolder, x, antOrMaven):
 	resetSonarDB()
 	fileSizes = sizeAtBeginningOfRelease(tagTuples[x])
 	sizeDict = createSizeDict(fileSizes)
-	smellsDict, ruleIDIssueDict = get_smells(tagTuples[x], fileSizes, tagTuples, repo, ruleIDs)
+	smellsDict, ruleIDIssueDict = get_smells(tagTuples[x], fileSizes, tagTuples, repo, ruleIDs, antOrMaven)
 	if smellsDict is None and ruleIDIssueDict is None:
 		return
 	linesTouchedDict = loc_touched(tagTuples[x], fileSizes, tagTuples, repo) #file dict, tuple of added and deleted
@@ -964,6 +993,11 @@ def main():
 	continuedPath = createRepo(githubURL)
 	projectPath = "./repoHolder/{}".format(continuedPath)#sys.argv[1]
 	jiraURL = sys.argv[3]
+	if len(sys.argv) == 5:
+		print("5 arguments")
+		antOrMaven = sys.argv[4]
+	elif len(sys.argv) == 4:
+		antOrMaven = "MAVEN" 
 	initialFolder = os.path.abspath(os.curdir)
 	repo = getRepo(projectPath)
 
@@ -972,7 +1006,7 @@ def main():
 	print("length of tag tuples: {}".format(len(tagTuples)))
 	createCSVHeader(ruleIDs)
 	for x in range(0, len(tagTuples)-1):
-		p = multiprocessing.Process(target=run_for_a_version, name="Running One Version", args=(tagTuples, repo, ruleIDs, projectPath, continuedPath, githubURL, jiraURL, initialFolder, x, ))
+		p = multiprocessing.Process(target=run_for_a_version, name="Running One Version", args=(tagTuples, repo, ruleIDs, projectPath, continuedPath, githubURL, jiraURL, initialFolder, x, antOrMaven, ))
 		p.start()
 		p.join(timeout=5000)
 		if p.is_alive():

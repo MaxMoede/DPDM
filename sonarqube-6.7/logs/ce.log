@@ -1,8 +1,0 @@
-2018.08.11 00:04:55 INFO  ce[AWUnzVcGkIFpcKjz-h3z][o.s.c.t.CeWorkerImpl] Execute task | project=org.apache.deltaspike:deltaspike | type=REPORT | id=AWUnzVcGkIFpcKjz-h3z
-2018.08.11 00:05:15 INFO  ce[AWUnzVcGkIFpcKjz-h3z][o.s.c.t.CeWorkerImpl] Executed task | project=org.apache.deltaspike:deltaspike | type=REPORT | id=AWUnzVcGkIFpcKjz-h3z | time=20477ms
-2018.08.11 00:25:59 INFO  ce[AWUn4KV5kIFpcKjz-h36][o.s.c.t.CeWorkerImpl] Execute task | project=org.apache.deltaspike:deltaspike | type=REPORT | id=AWUn4KV5kIFpcKjz-h36
-2018.08.11 00:26:17 INFO  ce[AWUn4KV5kIFpcKjz-h36][o.s.c.t.CeWorkerImpl] Executed task | project=org.apache.deltaspike:deltaspike | type=REPORT | id=AWUn4KV5kIFpcKjz-h36 | time=17732ms
-2018.08.11 00:47:07 INFO  ce[AWUn9AEukIFpcKjz-h4B][o.s.c.t.CeWorkerImpl] Execute task | project=org.apache.deltaspike:deltaspike | type=REPORT | id=AWUn9AEukIFpcKjz-h4B
-2018.08.11 00:47:30 INFO  ce[AWUn9AEukIFpcKjz-h4B][o.s.c.t.CeWorkerImpl] Executed task | project=org.apache.deltaspike:deltaspike | type=REPORT | id=AWUn9AEukIFpcKjz-h4B | time=22050ms
-2018.08.11 01:08:47 INFO  ce[AWUoB9T4kIFpcKjz-h4I][o.s.c.t.CeWorkerImpl] Execute task | project=org.apache.deltaspike:deltaspike | type=REPORT | id=AWUoB9T4kIFpcKjz-h4I
-2018.08.11 01:09:06 INFO  ce[AWUoB9T4kIFpcKjz-h4I][o.s.c.t.CeWorkerImpl] Executed task | project=org.apache.deltaspike:deltaspike | type=REPORT | id=AWUoB9T4kIFpcKjz-h4I | time=18187ms

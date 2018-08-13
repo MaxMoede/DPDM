@@ -1,1 +1,0 @@
-127.0.0.1 - - [07/Aug/2018:00:04:47 -0700] "POST /api/ce/submit?projectKey=org.apache.accumulo:accumulo-project&projectName=Apache%20Accumulo%20Project HTTP/1.1" 200 44 "-" "ScannerMaven/3.4.1.1168/3.5.2" "AWURLPSOppfx96BiAACu"
