@@ -20,7 +20,7 @@ def get_issues():
 	                                   user='sonarUser',
 			                           password='happify')
 		cursor = conn.cursor()
-		cursor.execute("""SELECT R.plugin_rule_key, R.name, A.failure_level, R.system_tags, R.def_remediation_base_effort
+		cursor.execute("""SELECT R.id, R.name, A.failure_level, R.system_tags, R.def_remediation_base_effort
 							FROM rules R, active_rules A
 							WHERE R.language LIKE '%java%' AND
 							R.id=A.rule_id""") #used to be R.id as the first thing to grab.
